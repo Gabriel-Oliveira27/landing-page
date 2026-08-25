@@ -6,7 +6,7 @@
  */
 
 import clsx from "clsx";
-import type { TipoMockup } from "@/content/projetos";
+import type { RotulosMockup, TipoMockup } from "@/content/projetos";
 
 /* ── Peças compartilhadas ─────────────────────────────────────────────── */
 
@@ -43,9 +43,12 @@ function Linha({ w = "w-full", alto = "h-2" }: { w?: string; alto?: string }) {
 
 const ALTURAS = [38, 62, 45, 78, 55, 92, 70, 48, 84, 60, 96, 72];
 
-function MockupDashboard() {
+function MockupDashboard({ rotulos }: { rotulos?: RotulosMockup }) {
+  const indicadores = rotulos?.indicadores ?? ["R$ 12.4k", "38", "6"];
+  const estados = rotulos?.estados ?? ["Entregue", "Em preparo", "Confirmado"];
+
   return (
-    <Janela url="dashboard · painel de gestão">
+    <Janela url={rotulos?.janela ?? "dashboard · painel de gestão"}>
       <div className="flex h-[19rem] text-[10px]">
         {/* Sidebar */}
         <div className="hidden w-32 shrink-0 flex-col gap-1 border-r border-borda bg-superficie p-2.5 sm:flex">
@@ -84,13 +87,13 @@ function MockupDashboard() {
               className="rounded-full px-2 py-1 text-[9px] font-medium text-white"
               style={{ background: "var(--projeto)" }}
             >
-              Novo
+              {rotulos?.selo ?? "Novo"}
             </span>
           </div>
 
           {/* Indicadores */}
           <div className="grid grid-cols-3 gap-2">
-            {["R$ 12.4k", "38", "6"].map((valor, i) => (
+            {indicadores.map((valor, i) => (
               <div key={i} className="rounded-lg border border-borda bg-superficie p-2">
                 <Linha w="w-8" alto="h-1.5" />
                 <div className="mt-1.5 font-display text-xs font-semibold text-texto">{valor}</div>
@@ -134,7 +137,7 @@ function MockupDashboard() {
                     background: "color-mix(in oklab, var(--projeto) 14%, transparent)",
                   }}
                 >
-                  {["Entregue", "Em preparo", "Confirmado"][i]}
+                  {estados[i]}
                 </span>
               </div>
             ))}
@@ -147,9 +150,9 @@ function MockupDashboard() {
 
 /* ── Loja: vitrine + carrinho ─────────────────────────────────────────── */
 
-function MockupLoja() {
+function MockupLoja({ rotulos }: { rotulos?: RotulosMockup }) {
   return (
-    <Janela url="loja · catálogo e checkout">
+    <Janela url={rotulos?.janela ?? "loja · catálogo e checkout"}>
       <div className="h-[19rem] bg-fundo">
         {/* Header da loja */}
         <div className="flex items-center gap-2 border-b border-borda bg-superficie px-3 py-2">
@@ -157,7 +160,7 @@ function MockupLoja() {
             className="font-display text-[11px] font-bold"
             style={{ color: "var(--projeto)" }}
           >
-            Sublime
+            {rotulos?.marca ?? "Sublime"}
           </span>
           <div className="ml-2 hidden flex-1 rounded-full border border-borda px-2 py-1 text-[9px] text-texto-fraco sm:block">
             Buscar produto…
@@ -250,7 +253,7 @@ const MES = [
   [0, 0, 0, 0, 4, 4, 4],
 ];
 
-function MockupEscala() {
+function MockupEscala({ rotulos }: { rotulos?: RotulosMockup }) {
   const cores = [
     "color-mix(in oklab, var(--projeto) 16%, transparent)",
     "var(--projeto)",
@@ -260,7 +263,7 @@ function MockupEscala() {
   ];
 
   return (
-    <Janela url="kronos · escala do mês">
+    <Janela url={rotulos?.janela ?? "kronos · escala do mês"}>
       <div className="h-[19rem] bg-fundo p-3">
         <div className="mb-2.5 flex items-center justify-between">
           <div>
@@ -464,9 +467,17 @@ function MockupCelular({ variante }: { variante: "pedidos" | "ponto" }) {
 
 /* ── Seletor ──────────────────────────────────────────────────────────── */
 
-export function Mockup({ tipo, projeto }: { tipo: TipoMockup; projeto: string }) {
-  if (tipo === "dashboard") return <MockupDashboard />;
-  if (tipo === "loja") return <MockupLoja />;
-  if (tipo === "escala") return <MockupEscala />;
+export function Mockup({
+  tipo,
+  projeto,
+  rotulos,
+}: {
+  tipo: TipoMockup;
+  projeto: string;
+  rotulos?: RotulosMockup;
+}) {
+  if (tipo === "dashboard") return <MockupDashboard rotulos={rotulos} />;
+  if (tipo === "loja") return <MockupLoja rotulos={rotulos} />;
+  if (tipo === "escala") return <MockupEscala rotulos={rotulos} />;
   return <MockupCelular variante={projeto === "kronos" ? "ponto" : "pedidos"} />;
 }

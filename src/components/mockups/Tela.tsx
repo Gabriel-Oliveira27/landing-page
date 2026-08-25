@@ -32,5 +32,5 @@ export function Tela({ peca, projeto }: { peca: Peca; projeto: string }) {
     );
   }
 
-  return <Mockup tipo={peca.mockup} projeto={projeto} />;
+  return <Mockup tipo={peca.mockup} projeto={projeto} rotulos={peca.rotulos} />;
 }

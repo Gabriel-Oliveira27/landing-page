@@ -61,11 +61,10 @@ export const trajetoria = [
   },
   {
     periodo: "fev/2025 — nov/2025",
-    // ⚠️ CONFIRMAR: qual era o cargo/setor entre a efetivação e a ida para o suporte?
-    cargo: "Efetivado — ⚠️ cargo a confirmar",
+    cargo: "Atendente de Lojas",
     organizacao: "Zenir Móveis e Eletros",
     descricao:
-      "Efetivado ao fim do contrato de aprendizagem, antes da transferência para a área de suporte técnico.",
+      "Efetivado ao fim do contrato de aprendizagem, no atendimento ao cliente em loja — antes da transferência para a área de suporte técnico.",
   },
   {
     periodo: "dez/2023 — dez/2024",
@@ -80,7 +79,7 @@ export const formacao = [
   {
     periodo: "cursando · 2º semestre",
     curso: "Técnico em Informática",
-    instituicao: "⚠️ CONFIRMAR — nome da instituição",
+    instituicao: "IFCE — Campus Iguatu",
   },
   {
     periodo: "contínuo",

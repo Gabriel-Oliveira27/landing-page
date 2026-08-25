@@ -24,12 +24,34 @@
 
 export type TipoMockup = "dashboard" | "loja" | "celular" | "escala";
 
+/**
+ * Textos que aparecem DENTRO do mockup desenhado em CSS.
+ *
+ * Existe porque os mockups são genéricos e reaproveitados entre projetos: sem
+ * isto, o mockup de loja mostrava "Sublime" escrito no topo mesmo quando estava
+ * ilustrando outro projeto, e o painel mostrava "Entregue / Em preparo" num CRM
+ * de orçamentos. Sem `rotulos`, entram os padrões de e-commerce.
+ */
+export type RotulosMockup = {
+  /** Barra de endereço da janela. */
+  janela?: string;
+  /** Marca escrita no topo da interface. */
+  marca?: string;
+  /** Os três indicadores numéricos do painel. */
+  indicadores?: [string, string, string];
+  /** Os três estados da lista do painel. */
+  estados?: [string, string, string];
+  /** Selo do canto superior. */
+  selo?: string;
+};
+
 export type Peca = {
   nome: string;
   tipo: string;
   descricao: string;
   mockup: TipoMockup;
   imagem?: string;
+  rotulos?: RotulosMockup;
   destaques: string[];
 };
 
@@ -192,6 +214,12 @@ export const projetos: Projeto[] = [
           "Registro de batidas e cálculo de saldo com a regra real de uma equipe de plantão: 8h de segunda a sexta, 4h no sábado, sábado de folga descontando 4h, plantão e home office abonados.",
         mockup: "dashboard",
         imagem: "",
+        rotulos: {
+          janela: "kronos · meu ponto",
+          selo: "Hoje",
+          indicadores: ["176h", "+4h12", "6"],
+          estados: ["Aprovado", "Pendente", "Abonado"],
+        },
         destaques: [
           "Saldo semanal e mensal calculado no servidor",
           "Datas gravadas em UTC explícito — sem registro perdido na virada do dia",
@@ -278,7 +306,7 @@ export const projetos: Projeto[] = [
         descricao:
           "Landing com portfólio de obras, serviços, processo, depoimentos e FAQ — tudo servido do banco, com formulário de orçamento que cai direto no CRM.",
         mockup: "loja",
-        imagem: "",
+        imagem: "/prints/projetta-site.jpg",
         destaques: [
           "Conteúdo vem do Postgres, com reserva estática se o banco cair",
           "Tipografia e paleta extraídas do material de marca do cliente",
@@ -293,6 +321,12 @@ export const projetos: Projeto[] = [
           "Segundo aplicativo Next, na porta 3001, que administra o site e acompanha os orçamentos recebidos do começo ao fim.",
         mockup: "dashboard",
         imagem: "",
+        rotulos: {
+          janela: "painel · orçamentos",
+          selo: "Novo",
+          indicadores: ["24", "7", "3"],
+          estados: ["Ganho", "Em contato", "Orçamento"],
+        },
         destaques: [
           "CRUD de projetos, depoimentos e FAQ, com ordem e publicar/ocultar",
           "Funil de orçamentos com histórico de eventos por registro",
@@ -402,6 +436,12 @@ export const projetos: Projeto[] = [
           "Janela nativa que roda na máquina do estudante, com instalador próprio para Windows que ainda oferece instalar VS Code, Git e PostgreSQL.",
         mockup: "dashboard",
         imagem: "",
+        rotulos: {
+          janela: "estudadev · trilhas",
+          selo: "Trilha",
+          indicadores: ["3", "12", "68%"],
+          estados: ["Concluído", "Em curso", "Bloqueado"],
+        },
         destaques: [
           "Correção executando o código do aluno, não comparando string",
           "Progresso salvo em banco local — funciona sem internet",
