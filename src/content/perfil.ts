@@ -12,9 +12,9 @@ export const perfil = {
   titulo: "Desenvolvedor Full-Stack",
   // Aparece logo abaixo do nome, no hero.
   chamada:
-    "Trabalho com suporte técnico de dia e construo produtos completos — web, painel e app — no resto do tempo.",
+    "Trabalho com suporte técnico durante o dia. No resto do tempo eu construo software: site, painel e aplicativo.",
   resumo:
-    "Construo o produto inteiro sozinho: modelagem de dados, API, painel administrativo, site para o cliente final e aplicativo Android. Next.js e React Native de ponta a ponta, com autenticação própria, controle de permissões, auditoria e deploy em produção. Nenhum template, nenhuma biblioteca de UI pronta.",
+    "Faço o produto inteiro sozinho, do banco de dados até o aplicativo instalado no celular. Isso inclui a API, o painel de quem administra e o site que o cliente final usa. Trabalho com Next.js e React Native, sempre com login próprio, controle de permissão e o sistema publicado de verdade. Não uso template nem biblioteca de interface pronta.",
   local: "Iguatu, Ceará",
   disponibilidade: "Disponível para projetos freelance",
 
@@ -41,8 +41,8 @@ export const perfil = {
 export const numeros = [
   { valor: "6", rotulo: "projetos próprios", detalhe: "do banco de dados ao deploy" },
   { valor: "11", rotulo: "aplicações construídas", detalhe: "sites, painéis e 2 apps Android" },
-  { valor: "260", rotulo: "commits versionados", detalhe: "142 Sublime · 95 Kronos · 23 nos demais" },
-  { valor: "100%", rotulo: "código próprio", detalhe: "sem template, sem biblioteca de UI pronta" },
+  { valor: "260", rotulo: "commits versionados", detalhe: "142 no Sublime, 95 no Kronos, 23 nos outros" },
+  { valor: "100%", rotulo: "código próprio", detalhe: "sem template e sem biblioteca de interface" },
 ];
 
 /**
@@ -57,21 +57,21 @@ export const trajetoria = [
     cargo: "Analista de Suporte Técnico",
     organizacao: "Zenir Móveis e Eletros",
     descricao:
-      "Atendimento e resolução de chamados de TI para a operação da rede. É desse dia a dia que nasceu o Kronos: a rotina de plantão, escala e controle de ponto que eu vivo é exatamente o problema que o sistema resolve.",
+      "Atendo e resolvo chamados de TI da operação da rede. O Kronos nasceu daqui. A rotina de plantão, escala e controle de ponto que eu vivo todo dia é o mesmo problema que o sistema resolve.",
   },
   {
     periodo: "fev/2025 — nov/2025",
     cargo: "Atendente de Lojas",
     organizacao: "Zenir Móveis e Eletros",
     descricao:
-      "Efetivado ao fim do contrato de aprendizagem, no atendimento ao cliente em loja — antes da transferência para a área de suporte técnico.",
+      "Efetivado ao fim do contrato de aprendizagem, no atendimento ao cliente em loja, até a transferência para o suporte técnico.",
   },
   {
     periodo: "dez/2023 — dez/2024",
     cargo: "Jovem Aprendiz",
     organizacao: "Zenir Móveis e Eletros",
     descricao:
-      "Primeira experiência formal. Um ano de contrato de aprendizagem concluído, seguido de efetivação.",
+      "Primeira experiência formal. Concluí o ano de contrato e fui efetivado em seguida.",
   },
 ];
 
@@ -93,7 +93,7 @@ export const formacao = [
  * É o que responde, antes de perguntarem, "há quanto tempo você faz isso?".
  */
 export const contextoAtual =
-  "Estudo Técnico em Informática, trabalho com suporte técnico e desenvolvo por conta própria. Nenhum dos projetos abaixo foi encomendado — cada um nasceu de um problema que eu quis resolver e foi levado até o deploy. O Kronos, feito para a rotina de plantão que eu vivo, é usado hoje pelo setor de suporte onde trabalho para montar a escala da equipe.";
+  "Curso Técnico em Informática no IFCE, trabalho no suporte técnico da Zenir e desenvolvo por conta própria. Nenhum dos projetos abaixo foi encomendado por alguém. Cada um começou de um problema que eu quis resolver e foi até o fim, com o sistema publicado. O Kronos saiu da minha própria rotina de plantão, e hoje o setor onde trabalho usa ele para montar a escala.";
 
 /** Blocos de habilidades — usados na seção "Stack". */
 export const stack = [

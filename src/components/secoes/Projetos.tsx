@@ -8,6 +8,18 @@ import { Secao, TituloSecao } from "@/components/ui/Secao";
 import { Botao } from "@/components/ui/Botao";
 import { Revelar } from "@/components/ui/Revelar";
 import { Tela } from "@/components/mockups/Tela";
+import { linkWhatsapp } from "@/lib/links";
+
+/**
+ * Conversa sobre um projeto específico, com a mensagem já escrita.
+ * Serve de saída para os projetos que ainda não têm link público: em vez de
+ * um card sem para onde ir, o visitante cai numa conversa.
+ */
+function linkConversa(nome: string) {
+  return linkWhatsapp(
+    `Olá, Gabriel! Vi o ${nome} no seu portfólio e queria conversar.`,
+  );
+}
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (
@@ -148,10 +160,9 @@ function BlocoProjeto({ projeto, indice }: { projeto: Projeto; indice: number })
       {/* ── Sob o capô ── */}
       <Revelar>
         <div className="mt-16">
-          <div className="mb-5 flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.18em] text-texto-fraco">
-            <span className="h-px w-6 bg-borda-forte" />
-            Sob o capô
-          </div>
+          <h4 className="mb-5 font-display text-lg font-semibold text-texto">
+            Como funciona por dentro
+          </h4>
           <div className="grid gap-4 md:grid-cols-3">
             {projeto.destaquesTecnicos.map((d) => (
               <div
@@ -202,6 +213,12 @@ function BlocoProjeto({ projeto, indice }: { projeto: Projeto; indice: number })
                   </svg>
                 </Botao>
               ))}
+            <Botao
+              href={linkConversa(projeto.nome)}
+              variante={projeto.links.some((l) => l.url) ? "secundario" : "primario"}
+            >
+              Conversar sobre este projeto
+            </Botao>
           </div>
         </div>
       </Revelar>
@@ -293,6 +310,12 @@ function CardCompacto({ projeto }: { projeto: Projeto }) {
               {l.rotulo}
             </Botao>
           ))}
+        <Botao
+          href={linkConversa(projeto.nome)}
+          variante={projeto.links.some((l) => l.url) ? "secundario" : "primario"}
+        >
+          Conversar sobre este
+        </Botao>
       </div>
     </article>
   );
@@ -302,14 +325,13 @@ export function Projetos() {
   return (
     <Secao id="projetos" className="border-t border-borda">
       <TituloSecao
-        etiqueta="Galeria"
         titulo={
           <>
             Seis projetos próprios,
             <br className="hidden sm:block" /> levados até o deploy.
           </>
         }
-        descricao="Nenhum destes foi encomendado por um cliente: cada um nasceu de um problema que eu quis resolver e foi construído inteiro — banco de dados, API, painel, site e app. Um deles é usado hoje pelo setor onde trabalho para montar a escala da equipe."
+        descricao="Nenhum destes foi encomendado por um cliente. Cada um começou de um problema que eu quis resolver e foi construído inteiro, do banco de dados ao aplicativo. Um deles é usado hoje pelo setor onde trabalho para montar a escala da equipe."
       />
 
       <div className="mt-16 space-y-20">
@@ -320,10 +342,9 @@ export function Projetos() {
 
       {projetosCompactos.length > 0 && (
         <div className="mt-20 border-t border-borda pt-14">
-          <div className="mb-8 flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.18em] text-texto-fraco">
-            <span className="h-px w-6 bg-borda-forte" />
+          <h3 className="mb-8 font-display text-2xl font-semibold text-texto">
             Também construí
-          </div>
+          </h3>
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {projetosCompactos.map((projeto) => (
               <Revelar key={projeto.slug}>

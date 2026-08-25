@@ -7,7 +7,6 @@ export function Sobre() {
   return (
     <Secao id="sobre" className="border-t border-borda bg-superficie/40">
       <TituloSecao
-        etiqueta="Currículo"
         titulo={`Sobre ${perfil.nome.split(" ")[0]}`}
         descricao={perfil.chamada}
       />
@@ -22,7 +21,7 @@ export function Sobre() {
       <div className="mt-14 grid gap-14 lg:grid-cols-[1.1fr_0.9fr]">
         {/* ── Trajetória + formação ── */}
         <div>
-          <h3 className="mb-6 font-display text-sm font-semibold uppercase tracking-[0.14em] text-texto-fraco">
+          <h3 className="mb-6 font-display text-lg font-semibold text-texto">
             Trajetória
           </h3>
 
@@ -38,7 +37,7 @@ export function Sobre() {
                     }}
                     aria-hidden
                   />
-                  <div className="text-xs font-medium uppercase tracking-wide text-texto-fraco">
+                  <div className="text-xs font-medium text-texto-fraco">
                     {t.periodo}
                   </div>
                   <div className="mt-1.5 font-display text-[17px] font-semibold text-texto">
@@ -51,7 +50,7 @@ export function Sobre() {
             ))}
           </ol>
 
-          <h3 className="mb-5 mt-12 font-display text-sm font-semibold uppercase tracking-[0.14em] text-texto-fraco">
+          <h3 className="mb-5 mt-12 font-display text-lg font-semibold text-texto">
             Formação
           </h3>
           <div className="space-y-4">
@@ -89,7 +88,7 @@ export function Sobre() {
 
         {/* ── Stack ── */}
         <div>
-          <h3 className="mb-6 font-display text-sm font-semibold uppercase tracking-[0.14em] text-texto-fraco">
+          <h3 className="mb-6 font-display text-lg font-semibold text-texto">
             Stack técnico
           </h3>
 
@@ -120,7 +119,7 @@ export function Sobre() {
               Onde estou
             </div>
             <p className="mt-2 text-sm leading-relaxed text-texto-suave">
-              {perfil.local} — disponível para trabalho remoto, híbrido ou presencial na região.
+              {perfil.local}. Aceito trabalho remoto, híbrido ou presencial na região.
             </p>
           </div>
         </div>

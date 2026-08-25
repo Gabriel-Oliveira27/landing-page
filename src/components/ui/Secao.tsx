@@ -17,12 +17,10 @@ export function Secao({
 }
 
 export function TituloSecao({
-  etiqueta,
   titulo,
   descricao,
   alinhamento = "esquerda",
 }: {
-  etiqueta: string;
   titulo: React.ReactNode;
   descricao?: string;
   alinhamento?: "esquerda" | "centro";
@@ -30,16 +28,7 @@ export function TituloSecao({
   const centro = alinhamento === "centro";
   return (
     <div className={clsx("max-w-3xl", centro && "mx-auto text-center")}>
-      <div
-        className={clsx(
-          "flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.18em] text-texto-fraco",
-          centro && "justify-center",
-        )}
-      >
-        <span className="h-px w-6 bg-borda-forte" />
-        {etiqueta}
-      </div>
-      <h2 className="mt-4 font-display text-3xl font-semibold leading-[1.15] tracking-tight text-texto sm:text-4xl">
+      <h2 className="font-display text-3xl font-semibold leading-[1.15] tracking-tight text-texto sm:text-4xl">
         {titulo}
       </h2>
       {descricao && (

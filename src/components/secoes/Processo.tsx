@@ -6,9 +6,8 @@ export function Processo() {
   return (
     <Secao id="processo" className="border-t border-borda bg-superficie/40">
       <TituloSecao
-        etiqueta="Como trabalho"
-        titulo="O que os dois projetos têm em comum"
-        descricao="São escolhas que repito em tudo que construo — e a razão de os sistemas continuarem funcionando depois que eu entrego."
+        titulo="Como eu construo"
+        descricao="São escolhas que eu repito em tudo que construo, e o motivo de os sistemas continuarem funcionando depois de entregues."
       />
 
       <div className="mt-14 grid gap-px overflow-hidden rounded-cartao border border-borda bg-borda sm:grid-cols-2 lg:grid-cols-3">

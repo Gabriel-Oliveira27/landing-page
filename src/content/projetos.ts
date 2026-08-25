@@ -17,8 +17,13 @@
  * código no lugar. Para trocar: salve o print em /public/prints/ e escreva
  * imagem: "/prints/kronos-dashboard.png".
  *
- * `destaque: true` rende o projeto por inteiro, com peças e "sob o capô".
+ * `destaque: true` rende o projeto por inteiro, com peças e detalhes técnicos.
  * Os demais entram numa grade compacta abaixo.
+ *
+ * NÃO coloque link de repositório aqui. Quem visita é cliente, não recrutador
+ * técnico: código aberto de cara não ajuda a vender e entrega o trabalho de
+ * graça. Projeto sem link publicado ganha automaticamente um botão de conversa
+ * no WhatsApp, montado em Projetos.tsx.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -82,7 +87,7 @@ export const projetos: Projeto[] = [
     nome: "Sublime",
     tagline: "Plataforma de e-commerce completa",
     descricao:
-      "Uma operação de venda inteira em três aplicações que conversam pela mesma API: a loja onde o cliente compra, o dashboard onde a vendedora administra e o app Android que avisa a cada pedido novo e traça a rota da entrega. Construído para uma revendedora Tupperware. As três aplicações estão publicadas e funcionais — o lançamento oficial depende de terminar o cadastro e as fotos do catálogo, não do sistema.",
+      "Três aplicações que conversam pela mesma API e dão conta de uma operação de venda inteira. Tem a loja onde o cliente compra, o painel onde a vendedora administra tudo e o app Android que avisa a cada pedido novo e abre a rota da entrega no mapa. Construí para uma revendedora Tupperware. As três já estão publicadas e funcionando. O que falta para o lançamento é terminar o cadastro e as fotos do catálogo, nada do sistema.",
     periodo: "mai/2026 — ago/2026",
     status: "Publicado · aguardando catálogo",
     contexto: "Construído para uma revendedora Tupperware",
@@ -107,7 +112,7 @@ export const projetos: Projeto[] = [
           "Frete calculado por geolocalização do CEP (ViaCEP + Nominatim)",
           "Cupons com desconto ou frete grátis, validados no servidor",
           "Rastreio do pedido por código ou CPF, com timeline de status",
-          "CSS Modules puro — nenhuma biblioteca de UI, bundle enxuto",
+          "CSS Modules puro, sem biblioteca de interface e com bundle enxuto",
         ],
       },
       {
@@ -143,7 +148,7 @@ export const projetos: Projeto[] = [
       {
         titulo: "Estoque sem furo",
         descricao:
-          "Baixa de estoque e criação do pedido acontecem na mesma transação atômica do banco — dois clientes comprando a última unidade ao mesmo tempo não geram venda fantasma.",
+          "Baixa de estoque e criação do pedido acontecem na mesma transação do banco. Se dois clientes compram a última unidade no mesmo instante, só uma venda passa.",
       },
       {
         titulo: "Autenticação própria",
@@ -170,7 +175,6 @@ export const projetos: Projeto[] = [
     ],
     links: [
       { rotulo: "Ver a loja", url: "https://sublime-react.vercel.app", tipo: "primario" },
-      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/sublime-react", tipo: "secundario" },
     ],
   },
 
@@ -179,7 +183,7 @@ export const projetos: Projeto[] = [
     nome: "Kronos",
     tagline: "Ponto, escalas e conhecimento da equipe",
     descricao:
-      "Central web onde se monta a escala do mês e se acompanha o ponto do time, mais um app Android que funciona 100% offline e sincroniza as batidas quando dá. Nasceu do problema que eu vivo — plantão, sábado de meio expediente e folga compensada — e hoje o setor de suporte onde trabalho usa para montar a escala.",
+      "Uma central web para montar a escala do mês e acompanhar o ponto da equipe, junto com um app Android que funciona sem internet e sincroniza as batidas quando aparece sinal. Fiz por causa da minha própria rotina: plantão, sábado de meio expediente, folga compensada. Hoje o setor de suporte onde trabalho usa ele para montar a escala.",
     periodo: "jun/2026 — ago/2026",
     status: "Em uso · app v1.1.6",
     contexto: "Usado pelo setor de suporte da Zenir",
@@ -197,7 +201,7 @@ export const projetos: Projeto[] = [
         nome: "Central web",
         tipo: "Web · PWA · Next.js 16",
         descricao:
-          "Calendário mensal editável, visão de fim de semana em formato de planilha e exportação da escala em Excel, PDF ou PNG — mais usuários, auditoria e base de conhecimento.",
+          "Calendário mensal editável, visão de fim de semana em formato de planilha e exportação da escala em Excel, PDF ou PNG. Também tem usuários, auditoria e base de conhecimento.",
         mockup: "escala",
         imagem: "",
         destaques: [
@@ -222,7 +226,7 @@ export const projetos: Projeto[] = [
         },
         destaques: [
           "Saldo semanal e mensal calculado no servidor",
-          "Datas gravadas em UTC explícito — sem registro perdido na virada do dia",
+          "Datas em UTC explícito, sem registro perdido na virada do dia",
           "Modelos de horário reutilizáveis com aviso por dia da semana",
           "Temas claro, escuro e noturno com cores personalizáveis por usuário",
         ],
@@ -231,7 +235,7 @@ export const projetos: Projeto[] = [
         nome: "Kronos App",
         tipo: "App Android · offline-first",
         descricao:
-          "Quatro batidas por dia, tudo salvo em SQLite no aparelho. Notificação com ação direta — 'Bati o ponto', 'Não bati ainda', 'Adiar 5 min' — sem precisar abrir o app.",
+          "Quatro batidas por dia, tudo salvo em SQLite no aparelho. A notificação já traz a ação: 'Bati o ponto', 'Não bati ainda' ou 'Adiar 5 min', sem precisar abrir o app.",
         mockup: "celular",
         imagem: "",
         destaques: [
@@ -246,17 +250,17 @@ export const projetos: Projeto[] = [
       {
         titulo: "Fuso horário resolvido de verdade",
         descricao:
-          "Datas gravadas e consultadas em UTC explícito. Batida registrada à meia-noite não some do relatório nem pula de dia — o bug clássico de sistema de ponto, tratado na origem.",
+          "Datas gravadas e consultadas em UTC explícito. Batida registrada à meia-noite não some do relatório nem pula de dia, que é o bug clássico de sistema de ponto.",
       },
       {
         titulo: "Permissão em camadas",
         descricao:
-          "Não são quatro dashboards separados: todo mundo tem a base (escala, ponto, conhecimento) e os papéis elevados ganham seções extras na mesma sidebar. Mudar o papel de alguém tem efeito imediato.",
+          "Em vez de quatro painéis separados, todo mundo enxerga a base do sistema e quem tem papel mais alto ganha seções extras no mesmo menu. Trocar o papel de alguém vale na hora.",
       },
       {
         titulo: "Sincronização incremental",
         descricao:
-          "O app manda só o que mudou desde o último cursor de atualização, e o servidor sempre amarra o registro ao dono da sessão — celular offline por dias sobe tudo sem duplicar.",
+          "O app manda só o que mudou desde a última sincronização, e o servidor sempre amarra o registro ao dono da sessão. Celular que passou dias sem internet sobe tudo de uma vez, sem duplicar nada.",
       },
     ],
     stack: [
@@ -286,7 +290,7 @@ export const projetos: Projeto[] = [
     nome: "Projetta",
     tagline: "Site institucional com painel próprio",
     descricao:
-      "Site de uma empresa júnior de engenharia civil e o painel que administra o conteúdo dele. Dois aplicativos Next no mesmo banco: quem cuida do site troca portfólio, depoimentos, FAQ e até a paleta de cores sem abrir uma linha de código.",
+      "Site de uma empresa júnior de engenharia civil, com um painel próprio para administrar o conteúdo. São dois aplicativos Next no mesmo banco de dados. Quem cuida do site troca portfólio, depoimentos, perguntas frequentes e até a paleta de cores sem abrir uma linha de código.",
     periodo: "ago/2026",
     status: "Proposta construída",
     contexto: "Projeto próprio · empresa júnior de engenharia civil",
@@ -304,7 +308,7 @@ export const projetos: Projeto[] = [
         nome: "Site institucional",
         tipo: "Web · Next.js 16",
         descricao:
-          "Landing com portfólio de obras, serviços, processo, depoimentos e FAQ — tudo servido do banco, com formulário de orçamento que cai direto no CRM.",
+          "Site com portfólio de obras, serviços, processo, depoimentos e perguntas frequentes, tudo servido do banco. O formulário de orçamento cai direto no CRM.",
         mockup: "loja",
         imagem: "/prints/projetta-site.jpg",
         destaques: [
@@ -339,12 +343,12 @@ export const projetos: Projeto[] = [
       {
         titulo: "O site não cai junto com o banco",
         descricao:
-          "O conteúdo vem do Neon, mas `content/site.ts` continua no código como reserva. Banco fora do ar, tabelas ainda não criadas ou sem registros: a landing carrega igual, com o conteúdo estático. É a diferença entre um site que depende de infraestrutura e um que sobrevive a ela.",
+          "O conteúdo vem do banco, mas uma cópia estática continua no código como reserva. Se o Neon sair do ar, ou se as tabelas ainda nem existirem, o site carrega do mesmo jeito. Quem visita não descobre que teve problema.",
       },
       {
         titulo: "Dois apps, um schema",
         descricao:
-          "Landing e painel são projetos Next independentes que compartilham o mesmo Postgres. O `schema.prisma` da raiz é a fonte da verdade e um comando sincroniza a cópia do painel — deploys separados, dado único.",
+          "Site e painel são projetos Next independentes que compartilham o mesmo Postgres. O schema da raiz manda, e um comando sincroniza a cópia do painel. Cada um sobe no seu ritmo, os dados são os mesmos.",
       },
       {
         titulo: "Marca extraída do material do cliente",
@@ -364,7 +368,6 @@ export const projetos: Projeto[] = [
     links: [
       // ⚠️ PREENCHER: URL publicada, se houver.
       { rotulo: "Ver o site", url: "", tipo: "primario" },
-      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/projetta", tipo: "secundario" },
     ],
   },
 
@@ -374,7 +377,7 @@ export const projetos: Projeto[] = [
     nome: "LS Soluções",
     tagline: "Landing de construtora com captação de leads",
     descricao:
-      "Site institucional de uma construtora, com API de contato própria e um painel que acompanha cada lead pelo funil — de 'novo' até 'ganho' ou 'perdido'.",
+      "Site institucional de uma construtora, com API de contato própria e um painel que acompanha cada lead pelo funil, de 'novo' até 'ganho' ou 'perdido'.",
     periodo: "ago/2026",
     status: "Proposta construída",
     contexto: "Projeto próprio · construtora em Iguatu-CE",
@@ -404,12 +407,11 @@ export const projetos: Projeto[] = [
       {
         titulo: "Preparada para virar sistema",
         descricao:
-          "Não é uma landing solta: o conteúdo sai de um módulo único, os leads passam por uma API com contrato estável e o painel já consome essa API. Evoluir para um dashboard completo é continuar, não recomeçar.",
+          "O conteúdo sai de um módulo único, os leads passam por uma API com contrato estável e o painel já consome essa API. Se um dia virar um sistema completo, é só continuar de onde parou.",
       },
     ],
     stack: ["Next.js 15", "React 19", "Tailwind CSS v4", "PostgreSQL", "Zod"],
     links: [
-      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/ls-solucoes", tipo: "secundario" },
     ],
   },
 
@@ -418,7 +420,7 @@ export const projetos: Projeto[] = [
     nome: "EstudaDEV",
     tagline: "Trilhas de estudo que corrigem o seu código",
     descricao:
-      "Aplicativo de desktop que executa trilhas de estudo para dev júnior e pleno: guarda o progresso num banco local e confere a resposta rodando o código de verdade, em vez de comparar texto.",
+      "Aplicativo de desktop com trilhas de estudo para quem está começando em programação. Ele guarda o progresso num banco local e confere a resposta rodando o código, em vez de comparar texto.",
     periodo: "ago/2026 — hoje",
     status: "Em construção",
     contexto: "Projeto próprio · produto em desenvolvimento",
@@ -444,7 +446,7 @@ export const projetos: Projeto[] = [
         },
         destaques: [
           "Correção executando o código do aluno, não comparando string",
-          "Progresso salvo em banco local — funciona sem internet",
+          "Progresso salvo em banco local, funciona sem internet",
           "Empacotado com PyInstaller, não exige Python na máquina destino",
           "Lançador que acha o Python certo no Linux e cai no navegador se faltar dependência",
         ],
@@ -454,12 +456,11 @@ export const projetos: Projeto[] = [
       {
         titulo: "Fora da minha zona de conforto",
         descricao:
-          "Os outros projetos são Next.js e React Native. Este é Python, interface em webview e distribuição de binário — inclusive a limitação de que o PyInstaller não cruza plataforma, o que obriga a buildar em cada sistema.",
+          "Os outros projetos são Next.js e React Native. Este é Python, com interface em webview e distribuição de binário. Descobri no caminho que o PyInstaller não cruza plataforma, então cada sistema precisa do próprio build.",
       },
     ],
     stack: ["Python", "pywebview", "PyInstaller", "SQLite", "Next.js (plataforma web)"],
     links: [
-      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/EstudaDEV", tipo: "secundario" },
     ],
   },
 
@@ -468,7 +469,7 @@ export const projetos: Projeto[] = [
     nome: "Tropical Pães",
     tagline: "Site de vitrine para comércio local",
     descricao:
-      "Página única para uma padaria de Iguatu: vitrine de produtos, galeria do ambiente e um formulário que monta a encomenda pronta no WhatsApp. Construída como demonstração — a padaria ainda não contratou.",
+      "Página única para uma padaria de Iguatu, com vitrine de produtos, galeria do ambiente e um formulário que monta a encomenda pronta no WhatsApp. Fiz como demonstração, a padaria ainda não contratou.",
     periodo: "ago/2026",
     status: "Demonstração",
     contexto: "Projeto próprio · proposta em aberto",
@@ -483,7 +484,7 @@ export const projetos: Projeto[] = [
         nome: "Site de vitrine",
         tipo: "Web · Next.js 16 · estático",
         descricao:
-          "Sem banco, sem servidor e sem coleta de dado nenhum: a página inteira é pré-renderizada no build, e o formulário só compõe a mensagem no aparelho de quem visita.",
+          "Sem banco, sem servidor e sem coleta de dado nenhum. A página inteira é gerada no build, e o formulário só monta a mensagem no aparelho de quem visita.",
         mockup: "loja",
         imagem: "/prints/tropical-paes.jpg",
         destaques: [
@@ -503,7 +504,6 @@ export const projetos: Projeto[] = [
     ],
     stack: ["Next.js 16", "React 19", "Tailwind CSS v4", "sharp"],
     links: [
-      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/TropicalPaes", tipo: "secundario" },
     ],
   },
 ];
@@ -516,7 +516,7 @@ export const principios = [
   {
     titulo: "Do banco ao app publicado",
     descricao:
-      "Schema, migrations, API, painel, front do cliente e build do APK. Não entrego só a tela: entrego o sistema funcionando em produção.",
+      "Schema, migrations, API, painel, site do cliente e build do APK. O que eu entrego é o sistema funcionando, não só a tela.",
   },
   {
     titulo: "Segurança como padrão",
@@ -526,7 +526,7 @@ export const principios = [
   {
     titulo: "Interface sem template",
     descricao:
-      "Nenhum Bootstrap, nenhum Material UI. Componentes escritos do zero, o que deixa o bundle menor, o carregamento mais rápido e o visual realmente do cliente.",
+      "Nenhum Bootstrap, nenhum Material UI. Escrevo os componentes do zero, e isso deixa o site mais leve, mais rápido e com a cara do cliente.",
   },
   {
     titulo: "Rastro de tudo",
@@ -536,7 +536,7 @@ export const principios = [
   {
     titulo: "Pensado para o celular",
     descricao:
-      "PWA instalável e app nativo quando faz diferença — push de pedido, biometria, rota no mapa e funcionamento offline.",
+      "PWA instalável, e app nativo quando faz diferença: push de pedido, biometria, rota no mapa e funcionamento sem internet.",
   },
   {
     titulo: "Documentação junto",
@@ -579,7 +579,7 @@ export const servicos = [
     titulo: "Entrar no seu time",
     resumo: "Vaga de desenvolvimento, CLT ou PJ, presencial ou remoto.",
     descricao:
-      "Levo prática de ponta a ponta em Next.js, React Native, Prisma e Postgres — construída em produtos completos, levados até o deploy, não em exercício de curso.",
+      "Tenho prática de ponta a ponta em Next.js, React Native, Prisma e Postgres, construída em produtos completos e não em exercício de curso.",
     itens: [
       "Full-stack React / Next.js",
       "Mobile React Native + Expo",

@@ -17,7 +17,7 @@ export function Rodape() {
 
           <div className="flex gap-14">
             <div>
-              <h3 className="text-xs font-medium uppercase tracking-[0.16em] text-texto-fraco">
+              <h3 className="text-sm font-semibold text-texto">
                 Projetos
               </h3>
               <ul className="mt-4 space-y-2.5">
@@ -35,7 +35,7 @@ export function Rodape() {
             </div>
 
             <div>
-              <h3 className="text-xs font-medium uppercase tracking-[0.16em] text-texto-fraco">
+              <h3 className="text-sm font-semibold text-texto">
                 Contato
               </h3>
               <ul className="mt-4 space-y-2.5">

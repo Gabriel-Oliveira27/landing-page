@@ -15,9 +15,8 @@ export function Servicos() {
   return (
     <Secao id="servicos" className="border-t border-borda">
       <TituloSecao
-        etiqueta="Trabalhar comigo"
         titulo="Três formas de me contratar"
-        descricao="Do zero, adaptando o que já existe, ou dentro do seu time. Escolha o caminho e me chame — respondo no mesmo dia."
+        descricao="Do zero, adaptando algo que já existe, ou dentro do seu time. Escolha o caminho e me chame no WhatsApp."
       />
 
       <div className="mt-14 grid gap-5 lg:grid-cols-3">
