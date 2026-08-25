@@ -19,7 +19,7 @@ const sans = Inter({
 
 const titulo = `${perfil.nome} — ${perfil.titulo}`;
 const descricao =
-  "Portfólio de Gabriel Oliveira: Sublime (e-commerce com loja, dashboard e app) e Kronos (ponto, escalas e app offline). Next.js, React Native, Prisma e Postgres.";
+  "Portfólio de Gabriel Oliveira, desenvolvedor full-stack em Iguatu-CE: seis projetos próprios levados até o deploy — e-commerce completo, sistema de ponto e escalas em uso, sites institucionais com painel. Next.js, React Native, Prisma e Postgres.";
 
 export const metadata: Metadata = {
   title: { default: titulo, template: `%s · ${perfil.nome}` },

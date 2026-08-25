@@ -2,8 +2,7 @@
  * ─────────────────────────────────────────────────────────────────────────────
  * DADOS PESSOAIS — edite só este arquivo para atualizar o site inteiro.
  *
- * Tudo marcado com  // ⚠️ CONFIRMAR  foi inferido dos repositórios (e-mail do
- * git, README do Sublime, remote do GitHub). Revise antes de publicar.
+ * O que ainda estiver marcado com  // ⚠️ CONFIRMAR  precisa da sua resposta.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -12,68 +11,90 @@ export const perfil = {
   iniciais: "GO",
   titulo: "Desenvolvedor Full-Stack",
   // Aparece logo abaixo do nome, no hero.
-  chamada: "Construo produtos completos — web, dashboard e app — do banco de dados à loja publicada.",
+  chamada:
+    "Trabalho com suporte técnico de dia e construo produtos completos — web, painel e app — no resto do tempo.",
   resumo:
-    "Trabalho o produto inteiro: modelagem de dados, API, painel administrativo, loja para o cliente final e aplicativo Android. Next.js e React Native de ponta a ponta, com autenticação própria, controle de permissões, auditoria e deploy em produção.",
-  local: "Ceará, Brasil", // ⚠️ CONFIRMAR
-  disponibilidade: "Disponível para projetos e vagas",
+    "Construo o produto inteiro sozinho: modelagem de dados, API, painel administrativo, site para o cliente final e aplicativo Android. Next.js e React Native de ponta a ponta, com autenticação própria, controle de permissões, auditoria e deploy em produção. Nenhum template, nenhuma biblioteca de UI pronta.",
+  local: "Iguatu, Ceará",
+  disponibilidade: "Disponível para projetos freelance",
 
   contato: {
     email: "gab.oliveirab27@gmail.com",
     whatsapp: "5588988568911",
     whatsappExibicao: "(88) 98856-8911",
     github: "https://github.com/Gabriel-Oliveira27",
-    linkedin: "", // ⚠️ PREENCHER — deixe vazio para esconder o link
-    curriculoPdf: "", // ⚠️ opcional — coloque o PDF em /public e aponte aqui: "/curriculo-gabriel-oliveira.pdf"
+    linkedin: "https://www.linkedin.com/in/gabriel-bezerra-6ba04223b",
+    curriculoPdf: "", // opcional — coloque o PDF em /public e aponte aqui
   },
 
   /** Mensagem já preenchida ao abrir o WhatsApp. */
-  whatsappMensagem: "Olá, Gabriel! Vi seu portfólio e queria conversar sobre um projeto.",
+  whatsappMensagem:
+    "Olá, Gabriel! Vi seu portfólio e queria conversar sobre um projeto.",
 } as const;
 
-/** Números do topo do hero — só coisas verificáveis nos repositórios. */
+/**
+ * Números do topo do hero.
+ *
+ * Todos conferidos nos repositórios em 25/08/2026. Se for atualizar, confira de
+ * novo — número inflado num portfólio quebra na primeira pergunta.
+ */
 export const numeros = [
-  { valor: "2", rotulo: "produtos completos", detalhe: "Sublime e Kronos, em produção" },
-  { valor: "5", rotulo: "aplicações publicadas", detalhe: "3 web + 2 apps Android" },
-  { valor: "198", rotulo: "commits versionados", detalhe: "120 no Sublime + 78 no Kronos" },
+  { valor: "6", rotulo: "projetos próprios", detalhe: "do banco de dados ao deploy" },
+  { valor: "11", rotulo: "aplicações construídas", detalhe: "sites, painéis e 2 apps Android" },
+  { valor: "260", rotulo: "commits versionados", detalhe: "142 Sublime · 95 Kronos · 23 nos demais" },
   { valor: "100%", rotulo: "código próprio", detalhe: "sem template, sem biblioteca de UI pronta" },
 ];
 
 /**
- * Currículo — experiência e formação.
- * ⚠️ PREENCHER: substitua pelos seus dados reais. Deixei a estrutura montada e
- * os dois projetos já preenchidos com as datas reais dos repositórios.
+ * Trajetória profissional.
+ *
+ * A ordem é do mais recente para o mais antigo — o componente pinta o primeiro
+ * item com a cor de destaque.
  */
 export const trajetoria = [
   {
-    periodo: "jun/2026 — hoje",
-    cargo: "Kronos — sistema de ponto e escalas",
-    organizacao: "Projeto próprio · em produção",
+    periodo: "nov/2025 — hoje",
+    cargo: "Analista de Suporte Técnico",
+    organizacao: "Zenir Móveis e Eletros",
     descricao:
-      "Central web com RBAC de 4 papéis, escalas de equipe, cálculo de saldo de horas, base de conhecimento e auditoria — mais o app Android offline-first que sincroniza o ponto.",
+      "Atendimento e resolução de chamados de TI para a operação da rede. É desse dia a dia que nasceu o Kronos: a rotina de plantão, escala e controle de ponto que eu vivo é exatamente o problema que o sistema resolve.",
   },
   {
-    periodo: "2025 — 2026",
-    cargo: "Sublime — plataforma de e-commerce",
-    organizacao: "Cliente · em produção",
+    periodo: "fev/2025 — nov/2025",
+    // ⚠️ CONFIRMAR: qual era o cargo/setor entre a efetivação e a ida para o suporte?
+    cargo: "Efetivado — ⚠️ cargo a confirmar",
+    organizacao: "Zenir Móveis e Eletros",
     descricao:
-      "Loja, dashboard do vendedor e app de gestão. Checkout em 4 etapas, PIX, parcelamento, cupons, cálculo de frete por geolocalização e rastreio de pedidos.",
+      "Efetivado ao fim do contrato de aprendizagem, antes da transferência para a área de suporte técnico.",
   },
   {
-    periodo: "⚠️ ano — ano",
-    cargo: "⚠️ Cargo / função",
-    organizacao: "⚠️ Empresa ou instituição",
-    descricao: "⚠️ Uma ou duas linhas sobre o que você fez e qual foi o resultado.",
+    periodo: "dez/2023 — dez/2024",
+    cargo: "Jovem Aprendiz",
+    organizacao: "Zenir Móveis e Eletros",
+    descricao:
+      "Primeira experiência formal. Um ano de contrato de aprendizagem concluído, seguido de efetivação.",
   },
 ];
 
 export const formacao = [
   {
-    periodo: "⚠️ ano — ano",
-    curso: "⚠️ Curso / graduação",
-    instituicao: "⚠️ Instituição",
+    periodo: "cursando · 2º semestre",
+    curso: "Técnico em Informática",
+    instituicao: "⚠️ CONFIRMAR — nome da instituição",
+  },
+  {
+    periodo: "contínuo",
+    curso: "Trilhas de front-end, back-end e mobile",
+    instituicao: "Udemy e cursos on-line",
   },
 ];
+
+/**
+ * Uma linha honesta sobre a situação atual, usada na seção "Sobre".
+ * É o que responde, antes de perguntarem, "há quanto tempo você faz isso?".
+ */
+export const contextoAtual =
+  "Estudo Técnico em Informática, trabalho com suporte técnico e desenvolvo por conta própria. Nenhum dos projetos abaixo foi encomendado — cada um nasceu de um problema que eu quis resolver e foi levado até o deploy. O Kronos, feito para a rotina de plantão que eu vivo, é usado hoje pelo setor de suporte onde trabalho para montar a escala da equipe.";
 
 /** Blocos de habilidades — usados na seção "Stack". */
 export const stack = [
@@ -83,7 +104,7 @@ export const stack = [
   },
   {
     area: "Mobile",
-    itens: ["React Native", "Expo SDK 56", "EAS Build", "SQLite local", "Push notifications", "Biometria"],
+    itens: ["React Native", "Expo", "EAS Build", "SQLite local", "Push notifications", "Biometria"],
   },
   {
     area: "Back-end",
@@ -91,6 +112,6 @@ export const stack = [
   },
   {
     area: "Infra & ferramentas",
-    itens: ["Vercel", "Cloudinary", "Git", "bcrypt", "CORS/RBAC", "ExcelJS · jsPDF"],
+    itens: ["Vercel", "Cloudinary", "Git", "bcrypt", "CORS/RBAC", "Python · PyInstaller"],
   },
 ];

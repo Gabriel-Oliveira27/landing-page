@@ -1,4 +1,4 @@
-import { perfil, trajetoria, formacao, stack } from "@/content/perfil";
+import { perfil, trajetoria, formacao, stack, contextoAtual } from "@/content/perfil";
 import { Secao, TituloSecao } from "@/components/ui/Secao";
 import { Revelar } from "@/components/ui/Revelar";
 import { Botao } from "@/components/ui/Botao";
@@ -11,6 +11,13 @@ export function Sobre() {
         titulo={`Sobre ${perfil.nome.split(" ")[0]}`}
         descricao={perfil.chamada}
       />
+
+      {/* Diz a situação real antes de alguém perguntar. */}
+      <Revelar>
+        <p className="mt-10 max-w-3xl rounded-cartao border border-borda bg-fundo p-5 text-[15px] leading-relaxed text-texto-suave">
+          {contextoAtual}
+        </p>
+      </Revelar>
 
       <div className="mt-14 grid gap-14 lg:grid-cols-[1.1fr_0.9fr]">
         {/* ── Trajetória + formação ── */}

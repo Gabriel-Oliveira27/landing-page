@@ -1,5 +1,9 @@
 import clsx from "clsx";
-import { projetos, type Projeto } from "@/content/projetos";
+import {
+  projetosCompactos,
+  projetosDestaque,
+  type Projeto,
+} from "@/content/projetos";
 import { Secao, TituloSecao } from "@/components/ui/Secao";
 import { Botao } from "@/components/ui/Botao";
 import { Revelar } from "@/components/ui/Revelar";
@@ -202,7 +206,94 @@ function BlocoProjeto({ projeto, indice }: { projeto: Projeto; indice: number })
         </div>
       </Revelar>
 
-      <span className="sr-only">{`Projeto ${indice + 1} de ${projetos.length}`}</span>
+      <span className="sr-only">
+        {`Projeto ${indice + 1} de ${projetosDestaque.length}`}
+      </span>
+    </article>
+  );
+}
+
+/**
+ * Card reduzido, para os projetos que não abrem em profundidade. Mostra o
+ * suficiente para dar contexto sem esticar a página por mais três telas.
+ */
+function CardCompacto({ projeto }: { projeto: Projeto }) {
+  const peca = projeto.pecas[0];
+
+  return (
+    <article
+      id={projeto.slug}
+      className="flex scroll-mt-24 flex-col rounded-cartao border border-borda bg-superficie p-6 transition-colors hover:border-borda-forte"
+      style={{ "--projeto": projeto.cor } as React.CSSProperties}
+    >
+      <div className="flex items-center gap-3">
+        <span
+          className="grid h-9 w-9 place-items-center rounded-lg font-display text-sm font-bold text-white"
+          style={{
+            background: `linear-gradient(135deg, ${projeto.cor}, ${projeto.corSecundaria})`,
+          }}
+          aria-hidden
+        >
+          {projeto.nome[0]}
+        </span>
+        <div>
+          <h3 className="font-display text-lg font-semibold text-texto">{projeto.nome}</h3>
+          <p className="text-[13px]" style={{ color: projeto.cor }}>
+            {projeto.tagline}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        <span
+          className="rounded-full px-2.5 py-1 text-[11px] font-medium"
+          style={{
+            color: projeto.cor,
+            background: `color-mix(in oklab, ${projeto.cor} 12%, transparent)`,
+          }}
+        >
+          {projeto.status}
+        </span>
+        <Chip>{projeto.periodo}</Chip>
+      </div>
+
+      <p className="mt-4 text-[14px] leading-relaxed text-texto-suave">{projeto.descricao}</p>
+
+      {peca && (
+        <ul className="mt-4 space-y-2">
+          {peca.destaques.slice(0, 3).map((d) => (
+            <li key={d} className="flex gap-2 text-[13px] leading-relaxed text-texto-fraco">
+              <Check />
+              <span>{d}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="mt-5 flex flex-wrap gap-1.5">
+        {projeto.stack.slice(0, 4).map((t) => (
+          <span
+            key={t}
+            className="rounded-md border border-borda bg-superficie-alta px-2 py-0.5 text-[10px] font-medium text-texto-suave"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-5 flex flex-1 flex-wrap items-end gap-2">
+        {projeto.links
+          .filter((l) => l.url)
+          .map((l) => (
+            <Botao
+              key={l.rotulo}
+              href={l.url}
+              variante={l.tipo === "primario" ? "primario" : "secundario"}
+            >
+              {l.rotulo}
+            </Botao>
+          ))}
+      </div>
     </article>
   );
 }
@@ -214,18 +305,34 @@ export function Projetos() {
         etiqueta="Galeria"
         titulo={
           <>
-            Dois produtos no ar,
-            <br className="hidden sm:block" /> cinco aplicações publicadas.
+            Seis projetos próprios,
+            <br className="hidden sm:block" /> levados até o deploy.
           </>
         }
-        descricao="Não são exercícios de portfólio: são sistemas usados por pessoas reais todo dia, com banco de dados em produção, autenticação própria e apps instalados em celular."
+        descricao="Nenhum destes foi encomendado por um cliente: cada um nasceu de um problema que eu quis resolver e foi construído inteiro — banco de dados, API, painel, site e app. Um deles é usado hoje pelo setor onde trabalho para montar a escala da equipe."
       />
 
       <div className="mt-16 space-y-20">
-        {projetos.map((projeto, i) => (
+        {projetosDestaque.map((projeto, i) => (
           <BlocoProjeto key={projeto.slug} projeto={projeto} indice={i} />
         ))}
       </div>
+
+      {projetosCompactos.length > 0 && (
+        <div className="mt-20 border-t border-borda pt-14">
+          <div className="mb-8 flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.18em] text-texto-fraco">
+            <span className="h-px w-6 bg-borda-forte" />
+            Também construí
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {projetosCompactos.map((projeto) => (
+              <Revelar key={projeto.slug}>
+                <CardCompacto projeto={projeto} />
+              </Revelar>
+            ))}
+          </div>
+        </div>
+      )}
     </Secao>
   );
 }

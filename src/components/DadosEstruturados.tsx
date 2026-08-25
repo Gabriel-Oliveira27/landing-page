@@ -35,7 +35,12 @@ export function DadosEstruturados() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(dados) }}
+      // Escapa "<" antes de entrar na tag. Os textos vêm de content/, que é
+      // feito para ser editado: no dia em que uma descrição contiver
+      // "</script>", a tag fecharia antes da hora e viraria injeção de HTML.
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(dados).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }

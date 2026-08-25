@@ -2,10 +2,23 @@
  * ─────────────────────────────────────────────────────────────────────────────
  * PROJETOS — a galeria do site.
  *
- * Cada projeto tem "peças" (as aplicações que o compõem). Cada peça pode ter
- * um print real em `imagem`; enquanto estiver vazio, o site desenha um mockup
- * em código no lugar. Para trocar: salve o print em /public/prints/ e escreva
+ * REGRA DESTE ARQUIVO: nada aqui é chamado de "cliente", porque nenhum destes
+ * projetos foi encomendado ou pago. Todos nasceram por iniciativa própria e
+ * foram levados até o deploy. Isso não é fraqueza: é o que dá para provar.
+ * Portfólio inflado quebra na primeira pergunta, e quem lê vai perguntar.
+ *
+ * Duas exceções que MERECEM ser ditas, porque são verdade e são fortes:
+ *   • Kronos é usado de fato pelo setor de suporte da Zenir para montar escala;
+ *   • Sublime foi construído para uma revendedora real, mas não foi lançado.
+ * Nos dois casos o texto diz exatamente isso — nem mais, nem menos.
+ *
+ * Cada projeto tem "peças" (as aplicações que o compõem). Cada peça pode ter um
+ * print real em `imagem`; enquanto estiver vazio, o site desenha um mockup em
+ * código no lugar. Para trocar: salve o print em /public/prints/ e escreva
  * imagem: "/prints/kronos-dashboard.png".
+ *
+ * `destaque: true` rende o projeto por inteiro, com peças e "sob o capô".
+ * Os demais entram numa grade compacta abaixo.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -36,25 +49,29 @@ export type Projeto = {
   destaquesTecnicos: { titulo: string; descricao: string }[];
   stack: string[];
   links: { rotulo: string; url: string; tipo: "primario" | "secundario" }[];
+  /** Rende em profundidade. Sem isso, entra na grade compacta. */
+  destaque?: boolean;
 };
 
 export const projetos: Projeto[] = [
+  // ───────────────────────────────── DESTAQUES ─────────────────────────────────
   {
     slug: "sublime",
     nome: "Sublime",
     tagline: "Plataforma de e-commerce completa",
     descricao:
-      "Uma operação de venda inteira em três aplicações que conversam pela mesma API: a loja onde o cliente compra, o dashboard onde o vendedor administra e o app Android que avisa a cada pedido novo e traça a rota da entrega.",
-    periodo: "2025 — 2026",
-    status: "Em produção",
-    contexto: "Cliente real · venda de produtos Tupperware",
+      "Uma operação de venda inteira em três aplicações que conversam pela mesma API: a loja onde o cliente compra, o dashboard onde a vendedora administra e o app Android que avisa a cada pedido novo e traça a rota da entrega. Construído para uma revendedora Tupperware. As três aplicações estão publicadas e funcionais — o lançamento oficial depende de terminar o cadastro e as fotos do catálogo, não do sistema.",
+    periodo: "mai/2026 — ago/2026",
+    status: "Publicado · aguardando catálogo",
+    contexto: "Construído para uma revendedora Tupperware",
     cor: "#E84D82",
     corSecundaria: "#B89EE8",
+    destaque: true,
     numeros: [
       { valor: "3", rotulo: "aplicações integradas" },
+      { valor: "141", rotulo: "produtos no catálogo" },
       { valor: "4", rotulo: "etapas de checkout" },
       { valor: "12x", rotulo: "parcelamento no cartão" },
-      { valor: "120", rotulo: "commits" },
     ],
     pecas: [
       {
@@ -63,7 +80,7 @@ export const projetos: Projeto[] = [
         descricao:
           "Catálogo com filtros por linha, capacidade e preço, agrupamento por variação de cor, carrinho persistente e checkout em 4 etapas com PIX, dinheiro ou cartão parcelado.",
         mockup: "loja",
-        imagem: "",
+        imagem: "/prints/sublime-loja.jpg",
         destaques: [
           "Frete calculado por geolocalização do CEP (ViaCEP + Nominatim)",
           "Cupons com desconto ou frete grátis, validados no servidor",
@@ -96,7 +113,7 @@ export const projetos: Projeto[] = [
           "Push de novo pedido disparado pelo backend da loja",
           "CRUD de estoque completo, com câmera/galeria para a foto",
           "Bloqueio por biometria, PIN ou padrão do aparelho",
-          "6 temas espelhando o dashboard, salvos no dispositivo",
+          "Consome a mesma API da loja, com sessão por cookie",
         ],
       },
     ],
@@ -109,7 +126,7 @@ export const projetos: Projeto[] = [
       {
         titulo: "Autenticação própria",
         descricao:
-          "JWT assinado com jose, senha em bcrypt, rate limit de 10 tentativas por 15 minutos e comparação em tempo constante contra timing attack. Sem OAuth de terceiros.",
+          "JWT assinado com jose, senha em bcrypt, rate limit no login e comparação em tempo constante contra timing attack. Sem OAuth de terceiros.",
       },
       {
         titulo: "Entrada validada na borda",
@@ -120,19 +137,18 @@ export const projetos: Projeto[] = [
     stack: [
       "Next.js 15",
       "React 19",
-      "TypeScript",
       "Prisma 7",
       "PostgreSQL (Neon)",
       "Expo / React Native",
       "Cloudinary",
       "Zod",
-      "JWT",
+      "JWT (jose)",
+      "web-push",
       "Vercel",
     ],
     links: [
       { rotulo: "Ver a loja", url: "https://sublime-react.vercel.app", tipo: "primario" },
-      // ⚠️ PREENCHER: URL do dashboard do vendedor publicado.
-      { rotulo: "Dashboard do vendedor", url: "", tipo: "secundario" },
+      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/sublime-react", tipo: "secundario" },
     ],
   },
 
@@ -141,17 +157,18 @@ export const projetos: Projeto[] = [
     nome: "Kronos",
     tagline: "Ponto, escalas e conhecimento da equipe",
     descricao:
-      "Central web onde a empresa monta a escala do mês e acompanha o ponto do time, mais um app Android que funciona 100% offline e sincroniza as batidas quando dá. Feito para uma equipe que trabalha em plantão, com sábado de meio expediente e folga compensada.",
-    periodo: "jun/2026 — hoje",
-    status: "Em produção · app v1.1.6",
-    contexto: "Equipe de suporte técnico em regime de plantão",
+      "Central web onde se monta a escala do mês e se acompanha o ponto do time, mais um app Android que funciona 100% offline e sincroniza as batidas quando dá. Nasceu do problema que eu vivo — plantão, sábado de meio expediente e folga compensada — e hoje o setor de suporte onde trabalho usa para montar a escala.",
+    periodo: "jun/2026 — ago/2026",
+    status: "Em uso · app v1.1.6",
+    contexto: "Usado pelo setor de suporte da Zenir",
     cor: "#2563EB",
     corSecundaria: "#22C55E",
+    destaque: true,
     numeros: [
+      { valor: "95", rotulo: "commits" },
       { valor: "4", rotulo: "papéis de acesso" },
       { valor: "44h", rotulo: "regra de jornada automatizada" },
       { valor: "3", rotulo: "formatos de exportação" },
-      { valor: "78", rotulo: "commits em 1 mês" },
     ],
     pecas: [
       {
@@ -172,7 +189,7 @@ export const projetos: Projeto[] = [
         nome: "Meu ponto",
         tipo: "Web · área do colaborador",
         descricao:
-          "Registro de batidas e cálculo de saldo com a regra real da empresa: 8h de segunda a sexta, 4h no sábado, sábado de folga descontando 4h, plantão e home office abonados.",
+          "Registro de batidas e cálculo de saldo com a regra real de uma equipe de plantão: 8h de segunda a sexta, 4h no sábado, sábado de folga descontando 4h, plantão e home office abonados.",
         mockup: "dashboard",
         imagem: "",
         destaques: [
@@ -217,7 +234,6 @@ export const projetos: Projeto[] = [
     stack: [
       "Next.js 16",
       "React 19",
-      "TypeScript",
       "Tailwind CSS v4",
       "Prisma 7",
       "Neon Postgres",
@@ -236,9 +252,226 @@ export const projetos: Projeto[] = [
       },
     ],
   },
+
+  {
+    slug: "projetta",
+    nome: "Projetta",
+    tagline: "Site institucional com painel próprio",
+    descricao:
+      "Site de uma empresa júnior de engenharia civil e o painel que administra o conteúdo dele. Dois aplicativos Next no mesmo banco: quem cuida do site troca portfólio, depoimentos, FAQ e até a paleta de cores sem abrir uma linha de código.",
+    periodo: "ago/2026",
+    status: "Proposta construída",
+    contexto: "Projeto próprio · empresa júnior de engenharia civil",
+    cor: "#6D0000",
+    corSecundaria: "#C41C17",
+    destaque: true,
+    numeros: [
+      { valor: "2", rotulo: "aplicações no mesmo banco" },
+      { valor: "6", rotulo: "paletas prontas no painel" },
+      { valor: "5", rotulo: "estágios no funil de orçamento" },
+      { valor: "0", rotulo: "linhas de código para editar conteúdo" },
+    ],
+    pecas: [
+      {
+        nome: "Site institucional",
+        tipo: "Web · Next.js 16",
+        descricao:
+          "Landing com portfólio de obras, serviços, processo, depoimentos e FAQ — tudo servido do banco, com formulário de orçamento que cai direto no CRM.",
+        mockup: "loja",
+        imagem: "",
+        destaques: [
+          "Conteúdo vem do Postgres, com reserva estática se o banco cair",
+          "Tipografia e paleta extraídas do material de marca do cliente",
+          "Cards de obra com placeholder gráfico enquanto não há foto",
+          "Revalidação sob demanda por rota de API ao salvar no painel",
+        ],
+      },
+      {
+        nome: "Painel e CRM",
+        tipo: "Web · app separado",
+        descricao:
+          "Segundo aplicativo Next, na porta 3001, que administra o site e acompanha os orçamentos recebidos do começo ao fim.",
+        mockup: "dashboard",
+        imagem: "",
+        destaques: [
+          "CRUD de projetos, depoimentos e FAQ, com ordem e publicar/ocultar",
+          "Funil de orçamentos com histórico de eventos por registro",
+          "Editor de tema: 6 paletas prontas ou ajuste token a token",
+          "Usuários do painel com papéis e sessão própria",
+        ],
+      },
+    ],
+    destaquesTecnicos: [
+      {
+        titulo: "O site não cai junto com o banco",
+        descricao:
+          "O conteúdo vem do Neon, mas `content/site.ts` continua no código como reserva. Banco fora do ar, tabelas ainda não criadas ou sem registros: a landing carrega igual, com o conteúdo estático. É a diferença entre um site que depende de infraestrutura e um que sobrevive a ela.",
+      },
+      {
+        titulo: "Dois apps, um schema",
+        descricao:
+          "Landing e painel são projetos Next independentes que compartilham o mesmo Postgres. O `schema.prisma` da raiz é a fonte da verdade e um comando sincroniza a cópia do painel — deploys separados, dado único.",
+      },
+      {
+        titulo: "Marca extraída do material do cliente",
+        descricao:
+          "Cor principal e tipografia saíram dos arquivos de identidade visual entregues em PDF e DOCX, e viraram tokens no `@theme` do Tailwind. Trocar a paleta inteira é mudar uma variável.",
+      },
+    ],
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Prisma 7",
+      "Neon Postgres",
+      "lucide-react",
+    ],
+    links: [
+      // ⚠️ PREENCHER: URL publicada, se houver.
+      { rotulo: "Ver o site", url: "", tipo: "primario" },
+      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/projetta", tipo: "secundario" },
+    ],
+  },
+
+  // ──────────────────────────── GRADE COMPACTA ────────────────────────────
+  {
+    slug: "ls-solucoes",
+    nome: "LS Soluções",
+    tagline: "Landing de construtora com captação de leads",
+    descricao:
+      "Site institucional de uma construtora, com API de contato própria e um painel que acompanha cada lead pelo funil — de 'novo' até 'ganho' ou 'perdido'.",
+    periodo: "ago/2026",
+    status: "Proposta construída",
+    contexto: "Projeto próprio · construtora em Iguatu-CE",
+    cor: "#1877E8",
+    corSecundaria: "#0F1E3D",
+    numeros: [
+      { valor: "6", rotulo: "rotas de API" },
+      { valor: "5", rotulo: "estágios de funil" },
+    ],
+    pecas: [
+      {
+        nome: "Landing + painel de leads",
+        tipo: "Web · Next.js 15",
+        descricao:
+          "Landing com serviços, obras, processo e FAQ, mais um painel em /admin que lista e move os leads recebidos.",
+        mockup: "loja",
+        imagem: "/prints/ls-solucoes.jpg",
+        destaques: [
+          "Formulário com validação Zod, honeypot e rate limit por IP",
+          "API com contrato único de resposta: { ok, data } ou { ok, message }",
+          "Persistência em Postgres com migrations versionadas em SQL",
+          "Logo e fotos entram só salvando o arquivo, sem tocar em código",
+        ],
+      },
+    ],
+    destaquesTecnicos: [
+      {
+        titulo: "Preparada para virar sistema",
+        descricao:
+          "Não é uma landing solta: o conteúdo sai de um módulo único, os leads passam por uma API com contrato estável e o painel já consome essa API. Evoluir para um dashboard completo é continuar, não recomeçar.",
+      },
+    ],
+    stack: ["Next.js 15", "React 19", "Tailwind CSS v4", "PostgreSQL", "Zod"],
+    links: [
+      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/ls-solucoes", tipo: "secundario" },
+    ],
+  },
+
+  {
+    slug: "estudadev",
+    nome: "EstudaDEV",
+    tagline: "Trilhas de estudo que corrigem o seu código",
+    descricao:
+      "Aplicativo de desktop que executa trilhas de estudo para dev júnior e pleno: guarda o progresso num banco local e confere a resposta rodando o código de verdade, em vez de comparar texto.",
+    periodo: "ago/2026 — hoje",
+    status: "Em construção",
+    contexto: "Projeto próprio · produto em desenvolvimento",
+    cor: "#3DDC97",
+    corSecundaria: "#F5C542",
+    numeros: [
+      { valor: "3", rotulo: "trilhas escritas" },
+      { valor: "1", rotulo: "instalador Windows publicado" },
+    ],
+    pecas: [
+      {
+        nome: "App de desktop",
+        tipo: "Python · pywebview",
+        descricao:
+          "Janela nativa que roda na máquina do estudante, com instalador próprio para Windows que ainda oferece instalar VS Code, Git e PostgreSQL.",
+        mockup: "dashboard",
+        imagem: "",
+        destaques: [
+          "Correção executando o código do aluno, não comparando string",
+          "Progresso salvo em banco local — funciona sem internet",
+          "Empacotado com PyInstaller, não exige Python na máquina destino",
+          "Lançador que acha o Python certo no Linux e cai no navegador se faltar dependência",
+        ],
+      },
+    ],
+    destaquesTecnicos: [
+      {
+        titulo: "Fora da minha zona de conforto",
+        descricao:
+          "Os outros projetos são Next.js e React Native. Este é Python, interface em webview e distribuição de binário — inclusive a limitação de que o PyInstaller não cruza plataforma, o que obriga a buildar em cada sistema.",
+      },
+    ],
+    stack: ["Python", "pywebview", "PyInstaller", "SQLite", "Next.js (plataforma web)"],
+    links: [
+      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/EstudaDEV", tipo: "secundario" },
+    ],
+  },
+
+  {
+    slug: "tropical-paes",
+    nome: "Tropical Pães",
+    tagline: "Site de vitrine para comércio local",
+    descricao:
+      "Página única para uma padaria de Iguatu: vitrine de produtos, galeria do ambiente e um formulário que monta a encomenda pronta no WhatsApp. Construída como demonstração — a padaria ainda não contratou.",
+    periodo: "ago/2026",
+    status: "Demonstração",
+    contexto: "Projeto próprio · proposta em aberto",
+    cor: "#F47621",
+    corSecundaria: "#FCCB31",
+    numeros: [
+      { valor: "100", rotulo: "Lighthouse em acessibilidade, SEO e boas práticas" },
+      { valor: "463 kB", rotulo: "peso total da página" },
+    ],
+    pecas: [
+      {
+        nome: "Site de vitrine",
+        tipo: "Web · Next.js 16 · estático",
+        descricao:
+          "Sem banco, sem servidor e sem coleta de dado nenhum: a página inteira é pré-renderizada no build, e o formulário só compõe a mensagem no aparelho de quem visita.",
+        mockup: "loja",
+        imagem: "/prints/tropical-paes.jpg",
+        destaques: [
+          "Selo 'aberto agora' calculado no fuso de Fortaleza, no navegador",
+          "JSON-LD de padaria com as duas unidades e horários, para o Google",
+          "Paleta ajustada para WCAG AA: o laranja da marca reprovava com texto branco",
+          "Logo recuperada de um JPEG que tinha o xadrez de transparência pintado na imagem",
+        ],
+      },
+    ],
+    destaquesTecnicos: [
+      {
+        titulo: "Acessibilidade medida, não presumida",
+        descricao:
+          "Branco sobre o laranja da marca dá 2,82:1 e reprova no padrão internacional. A paleta foi refeita para texto marrom sobre laranja (5,15:1), e um script no repositório confere cada combinação a cada build.",
+      },
+    ],
+    stack: ["Next.js 16", "React 19", "Tailwind CSS v4", "sharp"],
+    links: [
+      { rotulo: "Código no GitHub", url: "https://github.com/Gabriel-Oliveira27/TropicalPaes", tipo: "secundario" },
+    ],
+  },
 ];
 
-/** Seção "Como eu construo" — o que os dois projetos têm em comum. */
+export const projetosDestaque = projetos.filter((p) => p.destaque);
+export const projetosCompactos = projetos.filter((p) => !p.destaque);
+
+/** Seção "Como eu construo" — o que os projetos têm em comum. */
 export const principios = [
   {
     titulo: "Do banco ao app publicado",
@@ -275,29 +508,44 @@ export const principios = [
 /** Seção "Trabalhar comigo" — os três caminhos de contratação. */
 export const servicos = [
   {
-    titulo: "Sistema sob medida",
-    resumo: "Você tem um processo que hoje vive em planilha, WhatsApp ou papel.",
+    titulo: "Site para o seu negócio",
+    resumo: "Você não tem site, ou tem um que ninguém acha no Google.",
     descricao:
-      "Construo do zero, como fiz com o Kronos: modelagem, painel web, app quando fizer sentido e deploy. Você fica com o código.",
-    itens: ["Escopo fechado por etapas", "Painel web + app Android", "Deploy e domínio configurados", "Código e documentação entregues"],
+      "Página institucional ou de vitrine, feita sob medida, preparada para busca local e ligada ao seu WhatsApp. É o que fiz na Projetta, na LS Soluções e na Tropical Pães.",
+    itens: [
+      "Design da sua marca, sem template",
+      "Preparado para o Google encontrar",
+      "Contato e pedidos caindo no WhatsApp",
+      "Publicação e domínio configurados",
+    ],
     cta: "Pedir um orçamento",
     destaque: true,
   },
   {
-    titulo: "Licenciar um sistema pronto",
-    resumo: "Sublime e Kronos já existem e podem ser adaptados para o seu negócio.",
+    titulo: "Sistema sob medida",
+    resumo: "Você tem um processo que hoje vive em planilha, WhatsApp ou papel.",
     descricao:
-      "A base está pronta e testada em produção. Adapto identidade visual, regras de negócio e integrações — sai muito mais rápido e mais barato que começar do zero.",
-    itens: ["Identidade visual do seu negócio", "Regras e campos adaptados", "Migração dos seus dados", "Publicação na sua conta"],
-    cta: "Ver como funciona",
+      "Construo do zero, como fiz com o Kronos e o Sublime: modelagem, painel web, app quando fizer sentido e deploy. Você fica com o código.",
+    itens: [
+      "Escopo fechado por etapas",
+      "Painel web + app Android",
+      "Deploy e domínio configurados",
+      "Código e documentação entregues",
+    ],
+    cta: "Conversar sobre o projeto",
     destaque: false,
   },
   {
     titulo: "Entrar no seu time",
-    resumo: "Vaga full-stack, CLT ou PJ, presencial ou remoto.",
+    resumo: "Vaga de desenvolvimento, CLT ou PJ, presencial ou remoto.",
     descricao:
-      "Levo experiência de ponta a ponta em Next.js, React Native, Prisma e Postgres — construída em produtos que estão no ar com usuários reais, não em projetos de estudo.",
-    itens: ["Full-stack React / Next.js", "Mobile React Native + Expo", "Postgres, Prisma e modelagem", "Disponível para começar"],
+      "Levo prática de ponta a ponta em Next.js, React Native, Prisma e Postgres — construída em produtos completos, levados até o deploy, não em exercício de curso.",
+    itens: [
+      "Full-stack React / Next.js",
+      "Mobile React Native + Expo",
+      "Postgres, Prisma e modelagem",
+      "Experiência em suporte técnico",
+    ],
     cta: "Ver currículo",
     destaque: false,
   },

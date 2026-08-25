@@ -11,3 +11,6 @@ npm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 .claude/settings.local.json
+
+# perfil temporário do Chrome usado pelo scripts/print.mjs
+public/prints/_perfil-chrome/
