@@ -1,7 +1,34 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { hotel, quartos, espacos, instalacoes, historia, regulamento } from './dados';
+
+/**
+ * As fotos são as DELES, tiradas da galeria do site atual.
+ *
+ * É a escolha certa por um motivo que é também o argumento de venda:
+ * as fotos já são boas — luz natural, enquadramento, a arquitetura
+ * bem resolvida — e o site atual as enterra numa galeria de 107
+ * miniaturas que ninguém abre. Mostrar as fotos deles bem
+ * apresentadas prova que o problema é apresentação, não matéria-prima.
+ *
+ * Banco de imagens genérico seria pior, não melhor: uma piscina linda
+ * que não é a deles cria expectativa falsa, e no dia em que alguém
+ * percebe, queima a confiança que a proposta inteira quer construir.
+ *
+ * Limite real: 640px de largura, que é pouco para um fundo de tela
+ * cheia. O véu escuro por cima resolve na prática — e pedir os
+ * originais é a primeira conversa depois do "gostei".
+ */
+const FOTOS = {
+  passagem: '/proposta/diocesano/passagem.jpg',
+  fachada: '/proposta/diocesano/fachada.jpg',
+  alameda: '/proposta/diocesano/alameda.jpg',
+  jardim: '/proposta/diocesano/jardim.jpg',
+  apartamento: '/proposta/diocesano/apartamento.jpg',
+  logo: '/proposta/diocesano/logo.png',
+};
 
 // Cliente por causa do regulamento que abre e fecha e da escolha de
 // quarto que monta a mensagem. O `metadata` mora no layout ao lado.
@@ -24,14 +51,17 @@ export default function PropostaDiocesano() {
       {/* ── Cabeçalho ───────────────────────────────────────── */}
       <header className="sticky top-9 z-40 border-b border-[#E8DDD0] bg-[#FBF8F4]/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-5xl items-center gap-4 px-5">
-          <span className="min-w-0">
-            <span className="block whitespace-nowrap font-serif text-lg font-bold leading-none tracking-tight text-[#7B1E2B]">
-              Diocesano
-            </span>
-            <span className="block text-[10px] uppercase tracking-[0.2em] text-[#9A8878]">
-              Hotel · Iguatu
-            </span>
-          </span>
+          {/* A marca deles, mostrada a eles. O reconhecimento é
+              imediato e é o que faz a proposta parecer o site deles em
+              vez de um site qualquer. */}
+          <Image
+            src={FOTOS.logo}
+            alt="Diocesano Hotel"
+            width={307}
+            height={58}
+            priority
+            className="h-8 w-auto shrink-0"
+          />
 
           <nav className="ml-auto hidden gap-6 text-sm lg:flex">
             <a href="#quartos" className="hover:text-[#7B1E2B]">Apartamentos</a>
@@ -58,18 +88,23 @@ export default function PropostaDiocesano() {
           nessa ordem. As regras são importantes, mas não são
           convite. */}
       <section className="relative overflow-hidden border-b border-[#E8DDD0]">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#7B1E2B] via-[#63202A] to-[#3D1A20]" />
-        {/* Textura discreta: sem foto, o bloco de cor chapada fica
-            duro. No site real entram as fotos do hotel. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 70% 60%, white 1px, transparent 1px)',
-            backgroundSize: '42px 42px, 58px 58px',
-          }}
+        {/* A passagem coberta, com o piso em chevron e o jardim dos
+            dois lados. É a melhor foto que eles têm e hoje está
+            perdida entre 107 miniaturas. As linhas de fuga levam o
+            olho para dentro do hotel, que é o que uma abertura
+            precisa fazer. */}
+        <Image
+          src={FOTOS.passagem}
+          alt="Passagem coberta do hotel, com jardim dos dois lados"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
+        {/* Véu em duas camadas: o gradiente dá contraste ao texto e,
+            de quebra, disfarça que o original tem só 640px de
+            largura. */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#7B1E2B]/95 via-[#63202A]/90 to-[#3D1A20]/95" />
 
         <div className="relative mx-auto max-w-5xl px-5 py-20 sm:py-28">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#E8C9A0]">
@@ -128,7 +163,19 @@ export default function PropostaDiocesano() {
           horas e começa ao meio-dia.
         </p>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <figure className="mt-8 overflow-hidden rounded-2xl">
+          <div className="relative aspect-[16/7]">
+            <Image
+              src={FOTOS.apartamento}
+              alt="Apartamento com duas camas, mesa de trabalho e frigobar"
+              fill
+              sizes="(min-width: 1024px) 64rem, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </figure>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {quartos.map((q) => (
             <article
               key={q.slug}
@@ -191,6 +238,29 @@ export default function PropostaDiocesano() {
           Apartamento quádruplo e criança de 5 a 10 anos: adicional de R$ 40 por diária.
           Pet: R$ 25 por diária.
         </p>
+
+        {/* Observação dirigida ao HOTEL, não ao hóspede — some quando
+            o site for para valer. Está aqui porque é o achado mais
+            útil do levantamento e esconder seria desperdiçar: as
+            fotos de área externa deles são ótimas, e são justamente
+            as de quarto que decidem reserva. */}
+        <aside className="mt-10 rounded-2xl border border-dashed border-[#C9A227] bg-[#FDF8EC] p-5">
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-[#8A6D1B]">
+            Observação para o hotel · não aparece no site final
+          </p>
+          <p className="mt-2 leading-relaxed text-[#6B5A4E]">
+            Todas as fotos desta página são de vocês, tiradas da galeria do site atual. As de
+            área externa, jardim e arquitetura são muito boas — luz natural, enquadramento
+            pensado — e hoje estão perdidas numa galeria de mais de cem miniaturas que
+            ninguém abre.
+          </p>
+          <p className="mt-2.5 leading-relaxed text-[#6B5A4E]">
+            As de <b>apartamento</b> são o ponto fraco, e são justamente as que decidem uma
+            reserva. Uma manhã de fotos com a cama arrumada, cortina aberta e luz natural
+            resolveria — e é a única coisa desta proposta que eu não consigo fazer sozinho
+            daqui.
+          </p>
+        </aside>
       </section>
 
       {/* ── O hotel ──────────────────────────────────────────── */}
@@ -202,7 +272,33 @@ export default function PropostaDiocesano() {
             salões e capela, no bairro Planalto.
           </p>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Três fotos grandes no lugar da galeria de 107 miniaturas.
+              Menos imagens, maiores, escolhidas — é o que faz alguém
+              parar e olhar. */}
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {[
+              { src: FOTOS.fachada, alt: 'Fachada do Diocesano Hotel', legenda: 'A entrada, no bairro Planalto' },
+              { src: FOTOS.alameda, alt: 'Alameda lateral do complexo, com palmeiras', legenda: 'A alameda interna' },
+              { src: FOTOS.jardim, alt: 'Estátuas e jardim florido do complexo', legenda: 'Os jardins' },
+            ].map((f) => (
+              <figure key={f.src} className="overflow-hidden rounded-2xl bg-[#E8DDD0]">
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={f.src}
+                    alt={f.alt}
+                    fill
+                    sizes="(min-width: 640px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+                <figcaption className="bg-white px-4 py-2.5 text-sm text-[#6B5A4E]">
+                  {f.legenda}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {instalacoes.map((i) => (
               <div key={i.nome} className="rounded-2xl border border-[#E0D3C2] bg-white p-5">
                 <h3 className="font-serif text-xl">{i.nome}</h3>
