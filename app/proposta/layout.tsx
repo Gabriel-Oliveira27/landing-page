@@ -22,11 +22,11 @@ export default function LayoutProposta({ children }: { children: React.ReactNode
     <div className="min-h-dvh bg-white text-zinc-900">
       <div className="sticky top-0 z-50 flex h-9 items-center gap-3 border-b border-sky-300/60 bg-sky-50 px-3 text-[13px] text-sky-900 sm:px-4">
         <Link
-          href="/projetos"
-          aria-label="Voltar para os projetos"
+          href="/propostas"
+          aria-label="Voltar para as propostas"
           className="shrink-0 font-semibold underline-offset-2 hover:underline"
         >
-          ← <span className="hidden sm:inline">voltar</span>
+          ← <span className="hidden sm:inline">propostas</span>
         </Link>
 
         <span className="shrink-0 font-semibold">Proposta de redesenho</span>

@@ -8,9 +8,12 @@ import SeletorTema from './SeletorTema';
 import { Icone } from './Icones';
 import { linkWhatsApp } from '@/conteudo/perfil';
 
+// "Início" some no celular: a marca ao lado já leva para lá, e a quarta
+// aba não cabe a 325px sem empurrar a página para o lado.
 const ABAS = [
-  { href: '/', rotulo: 'Início' },
+  { href: '/', rotulo: 'Início', soLargo: true },
   { href: '/projetos', rotulo: 'Projetos' },
+  { href: '/propostas', rotulo: 'Propostas' },
   { href: '/contato', rotulo: 'Contato' },
 ];
 
@@ -36,7 +39,7 @@ export default function Cabecalho() {
                 key={aba.href}
                 href={aba.href}
                 aria-current={ativa ? 'page' : undefined}
-                className={`flex items-center gap-1.5 whitespace-nowrap rounded-lg px-2 py-1.5 text-[13px] transition-colors sm:px-3 sm:text-sm ${
+                className={`${aba.soLargo ? 'hidden sm:flex' : 'flex'} items-center gap-1.5 whitespace-nowrap rounded-lg px-2 py-1.5 text-[13px] transition-colors sm:px-3 sm:text-sm ${
                   ativa
                     ? 'bg-areia font-medium text-tinta'
                     : 'text-tinta-media hover:bg-areia/60 hover:text-tinta'

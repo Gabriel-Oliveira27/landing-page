@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { perfil, passos, linkWhatsApp } from '@/conteudo/perfil';
+import { propostas } from '@/conteudo/propostas';
 import { emDestaque } from '@/conteudo/projetos';
 import CartaoProjeto from '@/componentes/CartaoProjeto';
 import { Icone } from '@/componentes/Icones';
@@ -115,6 +117,66 @@ export default function Inicio() {
           {emDestaque.map((p) => (
             <CartaoProjeto key={p.slug} projeto={p} />
           ))}
+        </div>
+      </section>
+
+      {/* ── Propostas ───────────────────────────────────────────
+          Os modelos acima têm nome inventado; aqui é o contrário: o
+          site de um comércio de verdade, com o conteúdo dele. É a
+          prova mais direta de "como ficaria o meu". */}
+      <section className="border-t border-borda">
+        <div className="mx-auto max-w-5xl px-5 py-16">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 className="font-[family-name:var(--font-titulo)] text-3xl font-bold tracking-tight">
+                Propostas para comércios daqui
+              </h2>
+              <p className="mt-1.5 max-w-2xl text-tinta-media">
+                O site de negócios de Iguatu como ele poderia ser — com o cardápio, as fotos e o
+                endereço de verdade de cada um.
+              </p>
+            </div>
+            <Link href="/propostas" className="text-sm font-medium text-acento hover:text-acento-forte">
+              ver no simulador →
+            </Link>
+          </div>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {propostas.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/proposta/${p.slug}`}
+                className="group overflow-hidden rounded-2xl border border-borda bg-papel transition-colors hover:border-borda-forte"
+              >
+                <div className="relative h-32 overflow-hidden">
+                  <Image
+                    src={p.capa}
+                    alt=""
+                    fill
+                    sizes="(min-width: 640px) 20rem, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, transparent 20%, ${p.logo.fundo})` }} />
+                  <Image
+                    src={p.logo.src}
+                    alt={p.empresa}
+                    width={p.logo.largura}
+                    height={p.logo.altura}
+                    className="absolute bottom-3 left-4 h-9 w-auto max-w-[10rem] object-contain"
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-tinta-fraca">
+                    {p.ramo} · {p.cidade}
+                  </p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-tinta-media">{p.resumo}</p>
+                  <p className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-acento">
+                    Ver a proposta <Icone.seta className="size-3.5" />
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

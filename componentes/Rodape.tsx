@@ -27,6 +27,11 @@ export default function Rodape() {
               </Link>
             </li>
             <li>
+              <Link href="/propostas" className="hover:text-acento">
+                Propostas
+              </Link>
+            </li>
+            <li>
               <Link href="/contato" className="hover:text-acento">
                 Contato
               </Link>
