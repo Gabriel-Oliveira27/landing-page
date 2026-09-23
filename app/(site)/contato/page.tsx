@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { perfil, linkWhatsApp } from '@/conteudo/perfil';
+import FormularioContato from '@/componentes/FormularioContato';
 
 export const metadata: Metadata = {
   title: 'Contato',
@@ -71,6 +72,10 @@ export default function Contato() {
           </li>
         ))}
       </ul>
+
+      <div className="mt-10">
+        <FormularioContato />
+      </div>
 
       <section className="mt-12 rounded-2xl border border-borda bg-areia/50 p-6">
         <h2 className="font-[family-name:var(--font-titulo)] text-2xl font-bold tracking-tight">
