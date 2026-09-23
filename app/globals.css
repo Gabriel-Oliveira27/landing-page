@@ -1,0 +1,89 @@
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────────────────────
+   Paleta da vitrine.
+
+   Claro, e não escuro. O painel do Prospecta é escuro porque é
+   ferramenta de trabalho, olhada horas seguidas. Isto aqui é o
+   contrário: alguém abre uma vez, no celular, muitas vezes na rua e
+   com sol na tela. Fundo claro ganha de longe nessa situação, e ainda
+   imprime — tem cliente que imprime a proposta.
+
+   O acento é barro queimado. Fica na mesma família do âmbar do
+   Prospecta, que é de propósito: são do mesmo autor e a parentela
+   ajuda. Mas é mais fechado e mais sério, porque aqui a página está
+   pedindo dinheiro a alguém.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-fundo: #fcfaf6;
+  --color-papel: #ffffff;
+  --color-areia: #f4efe6;
+  --color-borda: #e6ded1;
+  --color-borda-forte: #cdc0ad;
+
+  --color-tinta: #1b1815;
+  --color-tinta-media: #5c534a;
+  --color-tinta-fraca: #8b8176;
+
+  --color-acento: #bf5028;
+  --color-acento-forte: #a34120;
+  --color-acento-fraco: #fbeee7;
+
+  --color-mato: #2f6f5e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    --color-fundo: #14120f;
+    --color-papel: #1d1a16;
+    --color-areia: #24201b;
+    --color-borda: #322c25;
+    --color-borda-forte: #4a4136;
+
+    --color-tinta: #f2ede5;
+    --color-tinta-media: #b3a99c;
+    --color-tinta-fraca: #8b8176;
+
+    --color-acento: #e07048;
+    --color-acento-forte: #f08a5f;
+    --color-acento-fraco: #2a1a12;
+
+    --color-mato: #5fae96;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-fundo);
+  color: var(--color-tinta);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Quem chega por âncora não pode ter o título escondido atrás do
+   cabeçalho fixo. */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respeita quem pediu menos movimento no sistema. Não é detalhe de
+   acessibilidade opcional: animação de entrada dá enjoo em quem tem
+   sensibilidade vestibular. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

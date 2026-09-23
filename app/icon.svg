@@ -1,0 +1,17 @@
+<!--
+  Ícone da aba. SVG e não .ico: o Next serve este arquivo como favicon
+  automaticamente, e vetor fica nítido em qualquer tamanho e em
+  qualquer densidade de tela — o .ico de 256px fica borrado na aba.
+
+  As medidas são as de web/components/Marca.tsx. Aqui a marca vem
+  sobre o quadrado escuro, porque a aba do navegador pode ser clara ou
+  escura e âmbar sozinho some no claro.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <rect width="24" height="24" rx="5.3" fill="#BF5028"/>
+  <g fill="#FFFFFF">
+    <rect x="3"   y="4.2"  width="18"   height="3.8" rx="1.9" opacity=".62"/>
+    <rect x="5.7" y="10.1" width="12.6" height="3.8" rx="1.9" opacity=".82"/>
+    <rect x="8.2" y="16"   width="7.6"  height="3.8" rx="1.9"/>
+  </g>
+</svg>

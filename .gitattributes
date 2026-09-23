@@ -1,0 +1,16 @@
+# Normaliza a quebra de linha no histórico.
+#
+# O Windows escreve CRLF e o Git avisa em cada `add` que vai converter.
+# Fixar LF no repositório acaba com o aviso e, mais importante, evita que
+# um arquivo inteiro apareça como modificado só por ter sido salvo noutro
+# editor — um diff de 400 linhas onde você mudou uma.
+* text=auto eol=lf
+
+# O .cmd é lido pelo interpretador de comandos do Windows, que quer CRLF.
+*.cmd text eol=crlf
+
+# Binários: nunca converter.
+*.ico binary
+*.png binary
+*.jpg binary
+*.webp binary
