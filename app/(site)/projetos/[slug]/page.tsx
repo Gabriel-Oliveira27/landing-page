@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { projetos, projetoPorSlug } from '@/conteudo/projetos';
 import { linkWhatsApp } from '@/conteudo/perfil';
+import { Icone } from '@/componentes/Icones';
+import { PontoDeEspera } from '@/componentes/Carregando';
 
 type Ctx = { params: Promise<{ slug: string }> };
 
@@ -23,16 +25,27 @@ export default async function Projeto({ params }: Ctx) {
   if (!p) notFound();
 
   const mensagem = `Olá, Gabriel! Vi o projeto "${p.nome}" no seu site e queria conversar.`;
+  const Simbolo = Icone[p.icone];
 
   return (
     <article className="mx-auto max-w-3xl px-5 py-12">
-      <Link href="/projetos" className="text-sm text-tinta-fraca transition-colors hover:text-acento">
-        ← Projetos
+      <Link
+        href="/projetos"
+        className="inline-flex items-center gap-1.5 text-sm text-tinta-fraca transition-colors hover:text-acento"
+      >
+        <Icone.seta className="size-4 rotate-180" />
+        Projetos
+        <PontoDeEspera />
       </Link>
 
       <header className="mt-6">
-        <span className="block h-1 w-12 rounded-full" style={{ background: p.cor }} />
-        <h1 className="mt-5 font-[family-name:var(--font-titulo)] text-4xl leading-tight tracking-tight sm:text-5xl">
+        <span
+          className="grid size-14 place-items-center rounded-2xl"
+          style={{ background: `${p.cor}1A`, color: p.cor }}
+        >
+          <Simbolo className="size-7" />
+        </span>
+        <h1 className="mt-5 font-[family-name:var(--font-titulo)] text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
           {p.nome}
         </h1>
         <p className="mt-3 text-xl leading-relaxed text-tinta-media">{p.chamada}</p>
@@ -54,9 +67,11 @@ export default async function Projeto({ params }: Ctx) {
           {p.demo && (
             <Link
               href={p.demo}
-              className="rounded-xl bg-acento px-5 py-3 font-medium text-white transition-colors hover:bg-acento-forte"
+              className="inline-flex items-center gap-2 rounded-xl bg-acento px-5 py-3 font-medium text-white transition-colors hover:bg-acento-forte"
             >
+              <Icone.raio className="size-4" />
               Abrir a demonstração
+              <PontoDeEspera />
             </Link>
           )}
           {p.real && (
@@ -64,9 +79,10 @@ export default async function Projeto({ params }: Ctx) {
               href={p.real}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl border border-borda-forte px-5 py-3 font-medium transition-colors hover:border-acento hover:text-acento"
+              className="inline-flex items-center gap-2 rounded-xl border border-borda-forte px-5 py-3 font-medium transition-colors hover:border-acento hover:text-acento"
             >
-              Ver no ar ↗
+              Ver no ar
+              <Icone.externo className="size-4" />
             </a>
           )}
         </div>
@@ -89,7 +105,7 @@ export default async function Projeto({ params }: Ctx) {
       <p className="mt-10 text-lg leading-relaxed">{p.descricao}</p>
 
       <section className="mt-10">
-        <h2 className="font-[family-name:var(--font-titulo)] text-2xl tracking-tight">
+        <h2 className="font-[family-name:var(--font-titulo)] text-2xl font-bold tracking-tight">
           O que você ganha
         </h2>
         <ul className="mt-4 space-y-2.5">
@@ -104,7 +120,7 @@ export default async function Projeto({ params }: Ctx) {
 
       {p.autonomia && (
         <section className="mt-10 rounded-2xl border border-borda bg-areia/50 p-6">
-          <h2 className="font-[family-name:var(--font-titulo)] text-2xl tracking-tight">
+          <h2 className="font-[family-name:var(--font-titulo)] text-2xl font-bold tracking-tight">
             O que você mexe sozinho
           </h2>
           <p className="mt-1.5 text-sm text-tinta-media">
@@ -122,7 +138,7 @@ export default async function Projeto({ params }: Ctx) {
       )}
 
       <section className="mt-12 border-t border-borda pt-8">
-        <h2 className="font-[family-name:var(--font-titulo)] text-2xl tracking-tight">
+        <h2 className="font-[family-name:var(--font-titulo)] text-2xl font-bold tracking-tight">
           Serve para o seu caso?
         </h2>
         <p className="mt-2 leading-relaxed text-tinta-media">

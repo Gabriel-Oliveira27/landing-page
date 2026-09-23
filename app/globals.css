@@ -1,20 +1,25 @@
 @import 'tailwindcss';
 
 /* ─────────────────────────────────────────────────────────────
-   Paleta da vitrine.
+   TEMAS
 
-   Claro, e não escuro. O painel do Prospecta é escuro porque é
-   ferramenta de trabalho, olhada horas seguidas. Isto aqui é o
-   contrário: alguém abre uma vez, no celular, muitas vezes na rua e
-   com sol na tela. Fundo claro ganha de longe nessa situação, e ainda
-   imprime — tem cliente que imprime a proposta.
+   Duas escolhas independentes, e não uma lista de oito combinações:
+   a paleta (`data-tema`) e o modo (`data-modo`). Quem gosta de barro
+   no claro e no escuro não deveria ter que escolher "barro claro" e
+   "barro escuro" como se fossem coisas diferentes.
 
-   O acento é barro queimado. Fica na mesma família do âmbar do
-   Prospecta, que é de propósito: são do mesmo autor e a parentela
-   ajuda. Mas é mais fechado e mais sério, porque aqui a página está
-   pedindo dinheiro a alguém.
+   Os neutros mudam junto com o acento, e não só ele. Um fundo cinza
+   puro com acento verde não vira "tema verde" — vira o mesmo tema
+   com um botão de outra cor. O que dá identidade é a temperatura do
+   branco, que a pessoa não percebe conscientemente mas sente.
+
+   `@theme` do Tailwind emite os tokens em `:root`, então qualquer
+   seletor mais específico sobrescreve em tempo de execução. É o que
+   permite trocar de tema sem recarregar.
    ───────────────────────────────────────────────────────────── */
+
 @theme {
+  /* Barro, claro — o padrão. */
   --color-fundo: #fcfaf6;
   --color-papel: #ffffff;
   --color-areia: #f4efe6;
@@ -30,36 +35,204 @@
   --color-acento-fraco: #fbeee7;
 
   --color-mato: #2f6f5e;
+
+  --animate-girar: girar 0.9s linear infinite;
+  --animate-pulsar: pulsar 1.6s ease-in-out infinite;
+  --animate-subir: subir 0.4s ease-out both;
+}
+
+/* ── Paletas, modo claro ──────────────────────────────────── */
+
+[data-tema='mata'] {
+  --color-fundo: #f7faf8;
+  --color-papel: #ffffff;
+  --color-areia: #e9f2ec;
+  --color-borda: #d5e5db;
+  --color-borda-forte: #b0c9bb;
+  --color-tinta: #13201a;
+  --color-tinta-media: #4a5c53;
+  --color-tinta-fraca: #7b8c84;
+  --color-acento: #2f7d5f;
+  --color-acento-forte: #23654c;
+  --color-acento-fraco: #e4f2ea;
+  --color-mato: #b5651d;
+}
+
+[data-tema='indigo'] {
+  --color-fundo: #f9f9fd;
+  --color-papel: #ffffff;
+  --color-areia: #eeeef8;
+  --color-borda: #dcdcf0;
+  --color-borda-forte: #b9b9dc;
+  --color-tinta: #171729;
+  --color-tinta-media: #50506b;
+  --color-tinta-fraca: #82829c;
+  --color-acento: #4f52c9;
+  --color-acento-forte: #3f41ad;
+  --color-acento-fraco: #ebebfa;
+  --color-mato: #2f7d5f;
+}
+
+[data-tema='carvao'] {
+  --color-fundo: #fafafa;
+  --color-papel: #ffffff;
+  --color-areia: #f0f0f0;
+  --color-borda: #e2e2e2;
+  --color-borda-forte: #bdbdbd;
+  --color-tinta: #161616;
+  --color-tinta-media: #555555;
+  --color-tinta-fraca: #858585;
+  --color-acento: #1f1f1f;
+  --color-acento-forte: #000000;
+  --color-acento-fraco: #eeeeee;
+  --color-mato: #2f6f5e;
+}
+
+/* ── Modo escuro ──────────────────────────────────────────────
+   Cada paleta aparece duas vezes: uma para quem forçou escuro no
+   seletor, outra para quem deixou no automático e tem o sistema em
+   escuro. O `:not([data-modo='claro'])` é o que faz "forçar claro"
+   ganhar do sistema. */
+
+[data-modo='escuro'],
+[data-modo='escuro'][data-tema='barro'] {
+  --color-fundo: #14120f;
+  --color-papel: #1d1a16;
+  --color-areia: #24201b;
+  --color-borda: #322c25;
+  --color-borda-forte: #4a4136;
+  --color-tinta: #f2ede5;
+  --color-tinta-media: #b3a99c;
+  --color-tinta-fraca: #8b8176;
+  --color-acento: #e07048;
+  --color-acento-forte: #f08a5f;
+  --color-acento-fraco: #2a1a12;
+  --color-mato: #5fae96;
+}
+
+[data-modo='escuro'][data-tema='mata'] {
+  --color-fundo: #0e1613;
+  --color-papel: #151f1a;
+  --color-areia: #1b2721;
+  --color-borda: #26352d;
+  --color-borda-forte: #3a5145;
+  --color-tinta: #e8f2ec;
+  --color-tinta-media: #a2b5ab;
+  --color-tinta-fraca: #7b8c84;
+  --color-acento: #4fb98c;
+  --color-acento-forte: #6ad0a3;
+  --color-acento-fraco: #11241c;
+  --color-mato: #e0924a;
+}
+
+[data-modo='escuro'][data-tema='indigo'] {
+  --color-fundo: #101019;
+  --color-papel: #171724;
+  --color-areia: #1e1e2e;
+  --color-borda: #2a2a3f;
+  --color-borda-forte: #414161;
+  --color-tinta: #ececf6;
+  --color-tinta-media: #a6a6c0;
+  --color-tinta-fraca: #82829c;
+  --color-acento: #8385ef;
+  --color-acento-forte: #9b9dff;
+  --color-acento-fraco: #1a1a2e;
+  --color-mato: #4fb98c;
+}
+
+[data-modo='escuro'][data-tema='carvao'] {
+  --color-fundo: #0e0e0e;
+  --color-papel: #161616;
+  --color-areia: #1d1d1d;
+  --color-borda: #2a2a2a;
+  --color-borda-forte: #444444;
+  --color-tinta: #f0f0f0;
+  --color-tinta-media: #a8a8a8;
+  --color-tinta-fraca: #7d7d7d;
+  --color-acento: #f0f0f0;
+  --color-acento-forte: #ffffff;
+  --color-acento-fraco: #242424;
+  --color-mato: #7bbda7;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-tema='claro']) {
+  :root:not([data-modo='claro']) {
     --color-fundo: #14120f;
     --color-papel: #1d1a16;
     --color-areia: #24201b;
     --color-borda: #322c25;
     --color-borda-forte: #4a4136;
-
     --color-tinta: #f2ede5;
     --color-tinta-media: #b3a99c;
     --color-tinta-fraca: #8b8176;
-
     --color-acento: #e07048;
     --color-acento-forte: #f08a5f;
     --color-acento-fraco: #2a1a12;
-
     --color-mato: #5fae96;
+  }
+
+  [data-tema='mata']:not([data-modo='claro']) {
+    --color-fundo: #0e1613;
+    --color-papel: #151f1a;
+    --color-areia: #1b2721;
+    --color-borda: #26352d;
+    --color-borda-forte: #3a5145;
+    --color-tinta: #e8f2ec;
+    --color-tinta-media: #a2b5ab;
+    --color-tinta-fraca: #7b8c84;
+    --color-acento: #4fb98c;
+    --color-acento-forte: #6ad0a3;
+    --color-acento-fraco: #11241c;
+    --color-mato: #e0924a;
+  }
+
+  [data-tema='indigo']:not([data-modo='claro']) {
+    --color-fundo: #101019;
+    --color-papel: #171724;
+    --color-areia: #1e1e2e;
+    --color-borda: #2a2a3f;
+    --color-borda-forte: #414161;
+    --color-tinta: #ececf6;
+    --color-tinta-media: #a6a6c0;
+    --color-tinta-fraca: #82829c;
+    --color-acento: #8385ef;
+    --color-acento-forte: #9b9dff;
+    --color-acento-fraco: #1a1a2e;
+    --color-mato: #4fb98c;
+  }
+
+  [data-tema='carvao']:not([data-modo='claro']) {
+    --color-fundo: #0e0e0e;
+    --color-papel: #161616;
+    --color-areia: #1d1d1d;
+    --color-borda: #2a2a2a;
+    --color-borda-forte: #444444;
+    --color-tinta: #f0f0f0;
+    --color-tinta-media: #a8a8a8;
+    --color-tinta-fraca: #7d7d7d;
+    --color-acento: #f0f0f0;
+    --color-acento-forte: #ffffff;
+    --color-acento-fraco: #242424;
+    --color-mato: #7bbda7;
   }
 }
 
+/* ── Base ─────────────────────────────────────────────────── */
+
 html {
   scroll-behavior: smooth;
+  color-scheme: light dark;
 }
 
 body {
   background: var(--color-fundo);
   color: var(--color-tinta);
   -webkit-font-smoothing: antialiased;
+  /* A troca de tema sem transição pisca. Só cor — transicionar tudo
+     faria o layout inteiro deslizar a cada clique. */
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 /* Quem chega por âncora não pode ter o título escondido atrás do
@@ -72,6 +245,58 @@ body {
   outline: 2px solid var(--color-acento);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ── Animações ────────────────────────────────────────────── */
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulsar {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* O brilho que percorre o esqueleto de carregamento. Diz "está vindo"
+   sem prometer quanto falta — barra de progresso que não sabe o total
+   mente, e a pessoa percebe. */
+.cintilar {
+  background: linear-gradient(
+    90deg,
+    var(--color-areia) 25%,
+    var(--color-borda) 37%,
+    var(--color-areia) 63%
+  );
+  background-size: 400% 100%;
+  animation: cintilar 1.4s ease infinite;
+}
+
+@keyframes cintilar {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
 }
 
 /* Respeita quem pediu menos movimento no sistema. Não é detalhe de

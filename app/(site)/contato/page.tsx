@@ -37,7 +37,7 @@ const CANAIS = [
 export default function Contato() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-14">
-      <h1 className="font-[family-name:var(--font-titulo)] text-4xl tracking-tight sm:text-5xl">
+      <h1 className="font-[family-name:var(--font-titulo)] text-4xl font-extrabold tracking-tight sm:text-5xl">
         Falar comigo
       </h1>
       <p className="mt-3 max-w-xl text-lg leading-relaxed text-tinta-media">
@@ -73,7 +73,7 @@ export default function Contato() {
       </ul>
 
       <section className="mt-12 rounded-2xl border border-borda bg-areia/50 p-6">
-        <h2 className="font-[family-name:var(--font-titulo)] text-2xl tracking-tight">
+        <h2 className="font-[family-name:var(--font-titulo)] text-2xl font-bold tracking-tight">
           Onde eu estou
         </h2>
         <p className="mt-2 leading-relaxed text-tinta-media">

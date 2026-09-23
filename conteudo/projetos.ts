@@ -15,6 +15,8 @@
  * é para acreditar.
  */
 
+import type { NomeIcone } from '@/componentes/Icones';
+
 export type Projeto = {
   slug: string;
   nome: string;
@@ -27,6 +29,8 @@ export type Projeto = {
   ganhos: string[];
   /** O que ela administra sozinha depois de entregue. */
   autonomia?: string[];
+  /** Nome do ícone em componentes/Icones.tsx. */
+  icone: NomeIcone;
   demo?: string;
   real?: string;
   /** Instruções de acesso, quando o link exige login. */
@@ -39,6 +43,7 @@ export type Projeto = {
 export const projetos: Projeto[] = [
   {
     slug: 'loja-online',
+    icone: 'loja',
     nome: 'Loja on-line',
     chamada: 'Sua loja aberta 24 horas, com carrinho e pagamento.',
     para: ['Roupas', 'Calçados', 'Cosméticos', 'Papelaria', 'Pet shop', 'Variedades'],
@@ -65,6 +70,7 @@ export const projetos: Projeto[] = [
   },
   {
     slug: 'vitrine-padaria',
+    icone: 'pao',
     nome: 'Vitrine com pedido no WhatsApp',
     chamada: 'Uma página só, feita para ser achada no Google.',
     para: ['Padaria', 'Confeitaria', 'Lanchonete', 'Ótica', 'Floricultura'],
@@ -86,6 +92,7 @@ export const projetos: Projeto[] = [
   },
   {
     slug: 'site-institucional',
+    icone: 'predio',
     nome: 'Site institucional com orçamento',
     chamada: 'Credibilidade para quem vende serviço, não produto.',
     para: ['Construtora', 'Engenharia', 'Arquitetura', 'Advocacia', 'Contabilidade'],
@@ -107,6 +114,7 @@ export const projetos: Projeto[] = [
   },
   {
     slug: 'locadora',
+    icone: 'carro',
     nome: 'Site com consulta de disponibilidade',
     chamada: 'O cliente vê o que está livre antes de ligar.',
     para: ['Locadora de veículos', 'Guincho', 'Turismo', 'Aluguel de equipamento'],
@@ -128,6 +136,7 @@ export const projetos: Projeto[] = [
   },
   {
     slug: 'site-com-painel',
+    icone: 'documento',
     nome: 'Site com painel de conteúdo',
     chamada: 'Publique você mesmo, sem depender de ninguém.',
     para: ['Empresa júnior', 'Associação', 'Escritório', 'Escola'],
@@ -147,6 +156,7 @@ export const projetos: Projeto[] = [
   },
   {
     slug: 'ponto-e-escala',
+    icone: 'relogio',
     nome: 'Controle de ponto e escala',
     chamada: 'Quem trabalha quando, e quem bateu ponto.',
     para: ['Comércio com turnos', 'Restaurante', 'Clínica', 'Equipe de plantão'],
@@ -167,6 +177,7 @@ export const projetos: Projeto[] = [
   },
   {
     slug: 'curriculo-digital',
+    icone: 'cracha',
     nome: 'Currículo digital com QR code',
     chamada: 'Seu currículo numa página, aberto por QR code.',
     para: ['Profissional autônomo', 'Prestador de serviço'],
@@ -178,6 +189,7 @@ export const projetos: Projeto[] = [
   },
   {
     slug: 'estudadev',
+    icone: 'livro',
     nome: 'EstudaDEV',
     chamada: 'Plataforma de estudo de programação e lógica.',
     para: ['Escola', 'Curso técnico', 'Estudante'],

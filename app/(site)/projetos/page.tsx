@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Projetos() {
   return (
     <div className="mx-auto max-w-5xl px-5 py-14">
-      <h1 className="font-[family-name:var(--font-titulo)] text-4xl tracking-tight sm:text-5xl">
+      <h1 className="font-[family-name:var(--font-titulo)] text-4xl font-extrabold tracking-tight sm:text-5xl">
         Projetos
       </h1>
       <p className="mt-3 max-w-2xl text-lg leading-relaxed text-tinta-media">

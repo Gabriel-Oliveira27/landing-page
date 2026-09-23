@@ -2,6 +2,28 @@ import Link from 'next/link';
 import { perfil, passos, linkWhatsApp } from '@/conteudo/perfil';
 import { emDestaque } from '@/conteudo/projetos';
 import CartaoProjeto from '@/componentes/CartaoProjeto';
+import { Icone } from '@/componentes/Icones';
+import { PontoDeEspera } from '@/componentes/Carregando';
+
+const DORES = [
+  {
+    icone: Icone.relogioAreia,
+    t: 'Você responde o mesmo preço o dia inteiro',
+    d: 'E quando está ocupado atendendo alguém na loja, a mensagem fica sem resposta — e a venda vai para quem respondeu antes.',
+  },
+  {
+    icone: Icone.busca,
+    t: 'Quem não te conhece não te acha',
+    d: 'Procurar no Google é o primeiro passo de quem acabou de chegar na cidade ou precisa de algo novo. Sem site, você não aparece.',
+  },
+  {
+    icone: Icone.celular,
+    t: 'O catálogo vive na sua cabeça',
+    d: 'Foto espalhada no status, preço que mudou e ninguém atualizou, cliente perguntando se ainda tem. Nada disso escala.',
+  },
+];
+
+const ICONE_PASSO = [Icone.conversa, Icone.loja, Icone.paleta, Icone.chave];
 
 export default function Inicio() {
   return (
@@ -11,8 +33,11 @@ export default function Inicio() {
           comércio de interior, trabalhar com alguém da região é meio
           argumento de venda por si só. */}
       <section className="mx-auto max-w-5xl px-5 pb-14 pt-16 sm:pt-24">
-        <p className="text-sm font-medium text-acento">{perfil.local}</p>
-        <h1 className="mt-3 max-w-3xl font-[family-name:var(--font-titulo)] text-4xl leading-[1.1] tracking-tight sm:text-6xl">
+        <p className="flex items-center gap-1.5 text-sm font-medium text-acento">
+          <Icone.mapa className="size-4" />
+          {perfil.local}
+        </p>
+        <h1 className="mt-3 max-w-3xl font-[family-name:var(--font-titulo)] text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
           {perfil.chamada}
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-tinta-media">{perfil.resumo}</p>
@@ -20,16 +45,19 @@ export default function Inicio() {
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href="/projetos"
-            className="rounded-xl bg-acento px-5 py-3 font-medium text-white transition-colors hover:bg-acento-forte"
+            className="inline-flex items-center gap-2 rounded-xl bg-acento px-5 py-3 font-medium text-white transition-colors hover:bg-acento-forte"
           >
             Ver os modelos funcionando
+            <Icone.seta className="size-4" />
+            <PontoDeEspera />
           </Link>
           <a
             href={linkWhatsApp()}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl border border-borda-forte px-5 py-3 font-medium transition-colors hover:border-acento hover:text-acento"
+            className="inline-flex items-center gap-2 rounded-xl border border-borda-forte px-5 py-3 font-medium transition-colors hover:border-acento hover:text-acento"
           >
+            <Icone.conversa className="size-4" />
             Falar no WhatsApp
           </a>
         </div>
@@ -45,29 +73,22 @@ export default function Inicio() {
       {/* ── O problema, nas palavras de quem vive ele ───────────── */}
       <section className="border-y border-borda bg-areia/50">
         <div className="mx-auto max-w-5xl px-5 py-14">
-          <h2 className="font-[family-name:var(--font-titulo)] text-3xl tracking-tight">
+          <h2 className="font-[family-name:var(--font-titulo)] text-3xl font-bold tracking-tight">
             Vender só por WhatsApp tem um teto.
           </h2>
-          <div className="mt-6 grid gap-6 sm:grid-cols-3">
-            {[
-              {
-                t: 'Você responde o mesmo preço o dia inteiro',
-                d: 'E quando está ocupado atendendo alguém na loja, a mensagem fica sem resposta — e a venda vai para quem respondeu antes.',
-              },
-              {
-                t: 'Quem não te conhece não te acha',
-                d: 'Procurar no Google é o primeiro passo de quem acabou de chegar na cidade ou precisa de algo novo. Sem site, você não aparece.',
-              },
-              {
-                t: 'O catálogo vive na sua cabeça',
-                d: 'Foto espalhada no status, preço que mudou e ninguém atualizou, cliente perguntando se ainda tem. Nada disso escala.',
-              },
-            ].map((i) => (
-              <div key={i.t}>
-                <h3 className="font-semibold leading-snug">{i.t}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-tinta-media">{i.d}</p>
-              </div>
-            ))}
+          <div className="mt-8 grid gap-7 sm:grid-cols-3">
+            {DORES.map((i) => {
+              const Simbolo = i.icone;
+              return (
+                <div key={i.t}>
+                  <span className="grid size-10 place-items-center rounded-xl bg-acento-fraco text-acento">
+                    <Simbolo className="size-5" />
+                  </span>
+                  <h3 className="mt-3 font-semibold leading-snug">{i.t}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-tinta-media">{i.d}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -78,7 +99,7 @@ export default function Inicio() {
       <section className="mx-auto max-w-5xl px-5 py-16">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 className="font-[family-name:var(--font-titulo)] text-3xl tracking-tight">
+            <h2 className="font-[family-name:var(--font-titulo)] text-3xl font-bold tracking-tight">
               Modelos prontos
             </h2>
             <p className="mt-1.5 text-tinta-media">
@@ -103,26 +124,41 @@ export default function Inicio() {
           ter que fazer nem quanto vai demorar. */}
       <section className="border-t border-borda bg-areia/50">
         <div className="mx-auto max-w-5xl px-5 py-16">
-          <h2 className="font-[family-name:var(--font-titulo)] text-3xl tracking-tight">
+          <h2 className="font-[family-name:var(--font-titulo)] text-3xl font-bold tracking-tight">
             Como funciona
           </h2>
           <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {passos.map((p, i) => (
-              <li key={p.titulo}>
-                <span className="flex size-8 items-center justify-center rounded-full bg-acento text-sm font-semibold text-white">
-                  {i + 1}
-                </span>
-                <h3 className="mt-3 font-semibold">{p.titulo}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-tinta-media">{p.texto}</p>
-              </li>
-            ))}
+            {passos.map((p, i) => {
+              const Simbolo = ICONE_PASSO[i];
+              return (
+                <li key={p.titulo} className="relative">
+                  {/* Linha ligando um passo ao seguinte. Só no desktop,
+                      onde eles ficam lado a lado — empilhados, uma
+                      linha horizontal apontaria para o nada. */}
+                  {i < passos.length - 1 && (
+                    <span
+                      aria-hidden
+                      className="absolute left-11 top-4 hidden h-px w-[calc(100%-2rem)] bg-borda lg:block"
+                    />
+                  )}
+                  <span className="relative flex size-8 items-center justify-center rounded-full bg-acento text-sm font-semibold text-white">
+                    {i + 1}
+                  </span>
+                  <h3 className="mt-3 flex items-center gap-2 font-semibold">
+                    <Simbolo className="size-4 text-acento" />
+                    {p.titulo}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-tinta-media">{p.texto}</p>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </section>
 
       {/* ── Chamada final ───────────────────────────────────────── */}
       <section className="mx-auto max-w-5xl px-5 py-20 text-center">
-        <h2 className="font-[family-name:var(--font-titulo)] text-3xl tracking-tight sm:text-4xl">
+        <h2 className="font-[family-name:var(--font-titulo)] text-3xl font-bold tracking-tight sm:text-4xl">
           Me conte o que você vende.
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-tinta-media">
