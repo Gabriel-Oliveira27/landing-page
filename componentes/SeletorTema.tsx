@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { Icone } from './Icones';
 
 const TEMAS = [
@@ -19,19 +19,44 @@ const MODOS = [
 type Tema = (typeof TEMAS)[number]['id'];
 type Modo = (typeof MODOS)[number]['id'];
 
+// O <html> é a verdade: o script do <head> aplica o tema salvo antes da
+// primeira pintura, e a troca escreve direto nele. O seletor só
+// observa — sem uma cópia em estado que possa ficar para trás.
+function assina(avisa: () => void) {
+  const obs = new MutationObserver(avisa);
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-tema', 'data-modo'] });
+  return () => obs.disconnect();
+}
+const temaAtual = () => (document.documentElement.dataset.tema as Tema) ?? 'barro';
+const modoAtual = () => (document.documentElement.dataset.modo as Modo) ?? 'sistema';
+
+function guarda(chave: string, valor: string) {
+  try {
+    localStorage.setItem(chave, valor);
+  } catch {
+    // Navegação anônima com armazenamento bloqueado: a troca vale
+    // para esta visita e não é lembrada. Melhor que quebrar.
+  }
+}
+
+function aplicaTema(novo: Tema) {
+  document.documentElement.dataset.tema = novo;
+  guarda('tema', novo);
+}
+
+function aplicaModo(novo: Modo) {
+  const d = document.documentElement;
+  if (novo === 'sistema') delete d.dataset.modo;
+  else d.dataset.modo = novo;
+  guarda('modo', novo);
+}
+
 export default function SeletorTema() {
   const [aberto, setAberto] = useState(false);
-  const [tema, setTema] = useState<Tema>('barro');
-  const [modo, setModo] = useState<Modo>('sistema');
+  // No servidor não há <html> para ler: vale o padrão até hidratar.
+  const tema = useSyncExternalStore(assina, temaAtual, () => 'barro' as Tema);
+  const modo = useSyncExternalStore(assina, modoAtual, () => 'sistema' as Modo);
   const caixa = useRef<HTMLDivElement>(null);
-
-  // Lê o que o script do <head> já aplicou, em vez de aplicar de
-  // novo: ele rodou antes da primeira pintura e o DOM é a verdade.
-  useEffect(() => {
-    const d = document.documentElement;
-    setTema((d.dataset.tema as Tema) ?? 'barro');
-    setModo((d.dataset.modo as Modo) ?? 'sistema');
-  }, []);
 
   useEffect(() => {
     if (!aberto) return;
@@ -46,27 +71,6 @@ export default function SeletorTema() {
       window.removeEventListener('keydown', esc);
     };
   }, [aberto]);
-
-  function trocaTema(novo: Tema) {
-    document.documentElement.dataset.tema = novo;
-    setTema(novo);
-    try {
-      localStorage.setItem('tema', novo);
-    } catch {
-      // Navegação anônima com armazenamento bloqueado: a troca vale
-      // para esta visita e não é lembrada. Melhor que quebrar.
-    }
-  }
-
-  function trocaModo(novo: Modo) {
-    const d = document.documentElement;
-    if (novo === 'sistema') delete d.dataset.modo;
-    else d.dataset.modo = novo;
-    setModo(novo);
-    try {
-      localStorage.setItem('modo', novo);
-    } catch {}
-  }
 
   return (
     <div ref={caixa} className="relative">
@@ -88,7 +92,7 @@ export default function SeletorTema() {
             {TEMAS.map((t) => (
               <button
                 key={t.id}
-                onClick={() => trocaTema(t.id)}
+                onClick={() => aplicaTema(t.id)}
                 title={t.nome}
                 aria-label={t.nome}
                 aria-pressed={tema === t.id}
@@ -113,7 +117,7 @@ export default function SeletorTema() {
               return (
                 <button
                   key={m.id}
-                  onClick={() => trocaModo(m.id)}
+                  onClick={() => aplicaModo(m.id)}
                   aria-pressed={modo === m.id}
                   className={`flex flex-col items-center gap-1 rounded-lg border py-2 text-[11px] transition-colors ${
                     modo === m.id
