@@ -597,6 +597,8 @@ export const cozinha = [
   { src: F('salmao-flambado.jpg'), alt: 'Rolinhos de salmão flambado com cream cheese', titulo: 'Salmão flambado', detalhe: 'Sushis especiais' },
   { src: F('picanha.jpg'), alt: 'Carne grelhada com arroz e batata frita', titulo: 'Grelhados', detalhe: 'Pratos individuais' },
   { src: F('niguiri.jpg'), alt: 'Niguiris de salmão flambado', titulo: 'Niguiris', detalhe: 'Por peça', preco: 'R$ 6,00 a peça' },
+  { src: F('uramakis.jpg'), alt: 'Uramakis de salmão', titulo: 'Uramakis', detalhe: 'Mínimo de 4 peças', preco: 'R$ 4,00 a peça' },
+  { src: F('hots.jpg'), alt: 'Bandeja de hots empanados com cream cheese', titulo: 'Hots', detalhe: 'Mínimo de 4 peças', preco: 'R$ 4,00 a peça' },
   { src: F('yakisoba.jpg'), alt: 'Duas tigelas de yakisoba', titulo: 'Yakissoba', detalhe: 'Porção individual', preco: 'a partir de R$ 34,90' },
   { src: F('pizza-nutella.jpg'), alt: 'Pizza doce de Nutella com morangos', titulo: 'Nutella com Morango', detalhe: 'Pizzas doces', preco: 47.9 },
   { src: F('rolinho-primavera.jpg'), alt: 'Rolinhos primavera', titulo: 'Rolinho Primavera', detalhe: 'Entradas', preco: 11.9 },
